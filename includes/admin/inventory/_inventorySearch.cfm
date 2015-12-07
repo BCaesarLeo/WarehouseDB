@@ -18,7 +18,7 @@
 	    <div class="col-sm-12">
 	      <section class="panel">
 	        <header class="panel-heading">
-	            Inventory Search <div class="pull-right"><strong>Total Qty</strong> (<span id="inventoryTotal" class="alert-success"></span> )</div>
+	            Inventory Search <div class="pull-right"><strong>Total Qty On Hand</strong> (<span id="inventoryTotal" class="alert-success"></span> )</div>
 	        </header>
 	        <div class="panel-body">
 	          <div class="adv-table">

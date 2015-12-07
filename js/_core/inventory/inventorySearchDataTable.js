@@ -12,7 +12,7 @@ function fnFormatDetails ( oTable, nTr )
 
 $(document).ready(function() {
 
-    var x = $('#dynamic-table').DataTable( {
+    var x = $('#dynamic-table').dataTable( {
         "aaSorting": [[ 4, "desc" ]],
         "columns" : [
             { data: "sku" },
@@ -21,27 +21,44 @@ $(document).ready(function() {
             { data: "qty", className: "rowDataSd" },
             { data: "datercvd" }
         ],
-        "sAjaxSource" : '/cfc/inventory/inventoryService.cfc?method=getAll&returnas=datatables&returnFormat=JSON',
-        "fnFooterCallback": function( nFoot, aaData, iStart, iEnd, aiDisplay ) {
-            var iTotal = 0;
-            var qtyColPos = 3;
-            for ( var i=0 ; i<aaData.length ; i++ ){
-                iTotal += aaData[i][ qtyColPos ]*1;
-            }
-             
-            /* Calculate the  share for browsers on this page */
-            var iPage = 0;
-            for ( var i=iStart ; i<iEnd ; i++ )
-            {
-                iPage += aaData[ aiDisplay[i] ][ qtyColPos ]*1;
-            }
-             
-            /* Modify the footer row to match what we want */
-            var nCells = nFoot.getElementsByTagName('th');
+        ajax: {
+            url: '/cfc/inventory/inventoryService.cfc?method=getAll&returnAs=datatables&returnFormat=JSON',
+            dataSrc: 'aaData'
+        },
+        "footerCallback": function(row, data, start, end, display) {
+            console.log('in footerCallback');
+            var api = this.api(), data;
 
-            nCells[ qtyColPos ].innerHTML = "Page Qty: " + iPage;
+            // Remove the formatting to get integer data for summation
+            var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '')*1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
 
-            $("#inventoryTotal").text(iTotal);
+            // Total over all pages
+            var total = api
+                .column( 3 )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+
+            // Total over this page
+            pageTotal = api
+                .column( 3, { page: 'current'} )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+
+            // Update footer
+            $( api.column( 3 ).footer() ).html(
+                'Qty: ' + pageTotal + " (this page)"
+            );
+                
+            $("#inventoryTotal").html(total);
         }
     } );
 

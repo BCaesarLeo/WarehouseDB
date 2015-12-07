@@ -23,7 +23,7 @@
 		<cfscript>
 			if ( arguments.returnAs == 'datatables') {
 				rs.dt = new cfc.json.DataTables();
-				rs.dt.setDataKeys( false );
+				rs.dt.setDataKeys( true );
 				rs.dt.setData( qInventory );
 
 				return rs.dt.$renderData();
