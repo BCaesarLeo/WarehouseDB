@@ -8,14 +8,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="EcoFlex - Inventory Solution for Fourwaywarehouse">
-    <meta name="author" content="Dynamix Computers">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
 
     <meta http-equiv=”X-UA-Compatible” content=”IE=EmulateIE9”>
     <meta http-equiv=”X-UA-Compatible” content=”IE=9”>
 
     <link rel="shortcut icon" href="images/favicon.png">
-    <title>EcoFlex Database</title>
+    <title>BucketAdmin</title>
     <!--Core CSS -->
     <link href="/bs3/css/bootstrap.min.css" rel="stylesheet">
     <link href="/js/jquery-ui/jquery-ui-1.10.1.custom.min.css" rel="stylesheet">
