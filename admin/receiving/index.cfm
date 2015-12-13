@@ -32,8 +32,8 @@
 <!--- *********************** THIS PAGE'S INCLUDE FILE --- this is where your main logic goes for this page ***********************--->
 <cfinclude template="/includes/admin/receiving/_receivingDashboard.cfm">
 Before file Upload
-<cfinclude template="/includes/chunks/_file_upload.cfm">
-
+<!--- <cfinclude template="/includes/chunks/_file_upload.cfm">
+ --->
 
 
 

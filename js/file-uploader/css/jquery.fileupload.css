@@ -13,8 +13,8 @@
 .fileinput-button {
     position: relative;
     overflow: hidden;
-    background: #78CD51;
-    border-color: #78CD51;
+    background: "#78CD51";
+    border-color: "#78CD51";
 }
 .fileinput-button input {
   position: absolute;

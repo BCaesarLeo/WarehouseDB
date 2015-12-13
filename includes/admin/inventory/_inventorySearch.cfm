@@ -49,3 +49,5 @@
 	</div>
 	</section>
 </section>
+<!--- *********************** _DebugScript ***********************--->
+<cfinclude template="/includes/_debug.cfm">

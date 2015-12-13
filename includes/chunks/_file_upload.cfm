@@ -1,3 +1,5 @@
+<cfinvoke component="cfc.inventory.inventoryupload" method="get_xcel_data" returnvariable="u"></cfinvoke>
+
 <section id="main-content">
   <section class="wrapper">
     <div class="row">
@@ -111,14 +113,31 @@
 
                             <cfif session.nsplSkip_SECTION eq 1>
                               <!--------       ---->
+
                               <cfsetting requesttimeout="4600">
-                               <cfparam name="ecoDataFile" default="">
+                               <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+                            <div class="row fileupload-buttonbar">
+                              <cfparam name="ecoDataFile" default="">
                                 <cfform action="index.cfm" method="POST" enctype="multipart/form-data">
-                                  <cfinput type="File" name="ecoDataFile" size="40" class="textfield">
-                                   <cfinput type="submit" name="ecoSubmit1"   value="Upload to Database">
+                                <div class="col-lg-7">
+                                    
+                            <button type="button" name="ecoDataFile"  class="btn btn-success fileinput-button" > <i class="glyphicon glyphicon-plus"></i><span>Select File</span><input type="file" name="ecoDataFile"></button>
+                                   <cfinput type="submit" name="ecoSubmit1" class="btn btn-primary start"  value="Upload to Database">
+<div class="col-lg-5 fileupload-progress fade"></cfinput>
+                                    <!-- The global progress bar -->
+                                    <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar progress-bar-success" style="width:0%;">
+                                        </div>
+                                    </div>
+                                    <!-- The extended global progress state -->
+                                    <div class="progress-extended">
+                                        &nbsp;
+                                    </div>
+                                  </div></div>
+                                </div>
+
 
                                    </cfform>
-
 
                                    <cfoutput>
 
@@ -854,10 +873,35 @@ required="true"
 
 
 
-
             <cffile action="read"
             file="#upFileDir#/#upNSFile#"
             variable="strCSV">
+
+
+
+<!--- NEW EXCEL READ --->
+<cfspreadsheet action="read" src="#upFileDir#/#upNSFile#" query="ecoxlsxData" excludeHeaderRow = "true">
+  <!--- NEW EXCEL READ --->
+
+<!--- NEW EXCEL READ --->
+<cfspreadsheet action="read" src="#upFileDir#/#upNSFile#" query="ecoxlsxDataextract"   excludeHeaderRow = "true">
+  <!--- NEW EXCEL READ --->
+
+
+
+
+  <!---Setting up New Column Names  I'm  unsure about the "VarChar, I input the sql tag to try to help with date upload ---->
+
+<!---   <cfset QueryChangeColumnName(ecoxlsquery,"col_1","SKU" )/> --->
+
+
+<!--- Add Date Recieved Column --->
+
+
+
+<!--- Add Container No. Column  --->
+
+          
 
             <!----CODE 3  ---->
 
@@ -1029,33 +1073,30 @@ BEFORE CHANGE
   var="#session.qResult#"
   label="CSV Results Query"
   /> --->
-
-  <cftable query = "session.qResult"  colheaders="yes" htmlTable="true" 
+ <cfset ecoxlsquery.RemoveRows(0,8)>
+  <cftable query = "ecoxlsquery"  colheaders="yes" htmlTable="true" 
   startRow = "1" colSpacing = "3" > 
 <!--- Each cfcol tag sets width of a column in table, and specifies header 
   information and text/CFML with which to fill cell. ---> 
-  <cfcol header = "Name" 
+ <!---  <cfcol header = "Item No" 
   align = "Left" 
   width = 6 
-  text= "#session.qResult.Competitor#"> 
+  text= "#ecoxlsquery.ITEM NO.#">  --->
 
-  <cfcol header = "Class"     
+  <cfcol header = "SKU"     
   align = "Left" 
   width = 6 
-  text= "#session.qResult.Class#"> 
+  text= "#ecoxlsquery.col_1#"> 
 
-  <cfcol header = "Score" 
+  <cfcol header = "Description" 
   align = "Left" 
-  width = 4 
-  text= "#session.qResult.Score# D.B."> 
-  <cfcol header = "Date" 
+  width = 15 
+  text= "#ecoxlsquery.col_2#"> 
+  <cfcol header = "Quantity" 
   align = "Left" 
   width = 5
-  text= "#session.qResult.Date1#">
-  <cfcol header = "Event" 
-  align = "Left" 
-  width = 8
-  text= "#session.qResult.Event#">  
+  text= "#ecoxlsquery.col_3#">
+
 </cftable> 
 <h1 style="color:blue;margin-bottom:30px;"></h1>
 
@@ -1307,4 +1348,4 @@ BEFORE CHANGE
 </section>
 </section>
 <!--- *********************** _DebugScript ***********************--->
-<cfinclude template="/includes/chunks/_debug.cfm">
+<!--- <cfinclude template="/includes/_debug.cfm"> --->
