@@ -1,4 +1,10 @@
 <cfoutput>
+	<!--- *********************** _header ARGUMENTS ***********************--->
+<cfsavecontent variable="extraCSS">
+	<link href="//cdn.datatables.net/s/bs/dt-1.10.10/datatables.min.css" rel="stylesheet" type="text/css" />
+	<link href="/js/advanced-datatable/css/demo_page.css" rel="stylesheet" type="text/css"  />
+	<link href="/js/advanced-datatable/css/demo_table.css" rel="stylesheet" type="text/css"  />
+</cfsavecontent>
 <!--- *********************** _header ***********************--->
 <cfinclude template="/includes/chunks/_header.cfm">
 
@@ -13,8 +19,13 @@
 
 <!--- *********************** THIS PAGE's specific javascript such as (datatables, flot, etc..) ***********************--->
 
+<cfsavecontent variable="extraJS">
+	<script src="https://cdn.datatables.net/s/bs/dt-1.10.10/datatables.min.js" type="text/javascript" ></script>
+	<script src="/js/_core/inventory/inventorySearchDataTable.js" type="text/javascript"></script>
+	<script src="/js/table-editable.js"></script>
+	<!-- END JAVASCRIPTS -->
 
-
+</cfsavecontent>
 <!--- *********************** _coreJavaScript ***********************--->
 <cfinclude template="/includes/chunks/_coreJavaScript.cfm">
 
