@@ -49,6 +49,27 @@
 
   </cffunction>
 
+  <cffunction name="saveEdits" access="remote" output="false" returntype="any" hint="">
+
+    <cfscript>
+      //script version of dump and cfabort
+      writeDump(arguments);  //this should have prevQty in it now...then you can have everything you need to write your query in the ARGUMENTS scope
+      abort;
+    </cfscript>
+
+    <!--- NOW JUST DO YOUR LOGIC HERE... however it doesn't send over the OLD value... but we can look at stashing the old qty... --->
+
+    <!--- <cfquery>
+      INSERT INTO STUFF HERE
+    </cfquery> --->
+
+
+    <cfscript>
+      return true;
+    </cfscript>
+
+  </cffunction>
+
 
 <!--- NEW FUNCTION THAT GETS UPLOAD FILE, PARSES IT FOR THE DATA  performs a few loops to extract add data and then saves to query --->
 <!--- ************************************* --->

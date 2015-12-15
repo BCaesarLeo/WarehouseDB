@@ -9,11 +9,8 @@ $(document).ready(function() {
                 function restoreRow(oTable, nRow) {
                     console.log('restoreRow');
                     var aData = oTable.fnGetData(nRow);
-                    console.log(aData);
                     
                     var jqTds = $('>td', nRow);
-                    console.log(jqTds);
-                    console.log(nRow);
 
                     // for (var i = 0, iLen = jqTds.length; i < iLen; i++) {
                     //     oTable.fnUpdate(aData[i], nRow, i, false);
@@ -30,8 +27,13 @@ $(document).ready(function() {
 
                 function editRow(oTable, nRow) {
                     var aData = oTable.fnGetData(nRow);
-                    console.log(aData);
+
                     var jqTds = $('>td', nRow);
+                    //take the dom element access it with jquery then find the "a" tag in the table cell
+                    //change the text from cancel to save... 
+                    //this way the click event doesn't get wiped out
+                    $(jqTds[0]).find('a').text('Save'); 
+
                     jqTds[1].innerHTML = '<a class="cancel" href="#">Cancel</a>';
                     //uncomment to edit other columns 2-4 eg: 3-5 because js is 0 based...vs CF
                     //jqTds[2].innerHTML = '<input type="text" class="form-control small" value="' + aData['sku'] + '">';
@@ -55,6 +57,9 @@ $(document).ready(function() {
 
                 function saveRow(oTable, nRow) {
                     var jqInputs = $('input', nRow);
+                    var rowDataBeforeSave = oTable.fnGetData(nRow);
+                    var rowDataBeforeSave = oTable.fnGetData(nRow);
+                    var x = rowDataBeforeSave.qty;
 
                     oTable.fnUpdate('<a class="edit" href="">Edit</a>', nRow, 0, false);
                     //make a delete button if they are admin or nothing if they aren't. might not be perfect but should work unless they are hackers..
@@ -64,9 +69,15 @@ $(document).ready(function() {
                     //oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
                     //oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
                     //oTable.fnUpdate(jqInputs[4].value, nRow, 4, false);
-                    oTable.fnUpdate(jqInputs[5].value, nRow, 5, false); //qty field.. position matters in this code..
+
+                    //qty field.. position matters in this code..
+                    //since we only have one editable field at the moment this is input 0 .. if you added others you would adjust the indexes accordingly...
+                    oTable.fnUpdate(jqInputs[0].value, nRow, 5, false); 
 
                     oTable.fnDraw();
+
+                    //lets return the old qty here so we can pass it along with the data...
+                    return x;
                 }
 
                 function cancelEditRow(oTable, nRow) {
@@ -75,7 +86,7 @@ $(document).ready(function() {
                     //oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
                     //oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
                     //oTable.fnUpdate(jqInputs[4].value, nRow, 4, false);
-                    oTable.fnUpdate(jqInputs[5].value, nRow, 5, false);
+                    oTable.fnUpdate(jqInputs[0].value, nRow, 5, false);
                     oTable.fnDraw();
                 }
 
@@ -93,10 +104,11 @@ $(document).ready(function() {
                 ];
 
                 //if admin give them 2 extra columns.. easier if they are on the end since stuff is positional based..
-                if (isAdmin == true) {
-                    arColumns.push( { data: "edtqty" } );
-                    arColumns.push( { data: "iisedited" } );
-                }
+                //lets scrap this for now.. too late to see what's wrong...
+                // if (isAdmin == true) {
+                //     arColumns.push( { data: "edtqty" } );
+                //     arColumns.push( { data: "iisedited" } );
+                // }
 
                var nEditing = null;
 
@@ -142,7 +154,7 @@ $(document).ready(function() {
                             /* Get the row as a parent of the link that was clicked on */
                             var nRow = $(this).parents('tr')[0];
 
-                            console.log(nRow);
+                            
 
                             if (nEditing !== null && nEditing != nRow) {
                                 /* Currently editing - but not this row - restore the old before continuing to edit mode */
@@ -151,9 +163,33 @@ $(document).ready(function() {
                                 nEditing = nRow;
                             } else if (nEditing == nRow && this.innerHTML == "Save") {
                                 /* Editing this row and want to save it */
-                                saveRow(oTable, nEditing);
+                                var prevQty = saveRow(oTable, nEditing);
+                                console.log('prevQty');
+                                console.log(prevQty);
                                 nEditing = null;
-                                alert(" We'll add an ajax call here in a sec.....Updated! Do not forget to do some ajax to sync with backend :)");
+                                //get the data from the row...
+                                var aData = oTable.fnGetData(nRow);
+
+                                //now that we sent old qty back above lets add it to the data of the ajax call..
+                                aData.prevQty = prevQty;
+
+                                console.log(aData);
+
+                                $.ajax({
+                                  url: "/cfc/inventory/inventoryService.cfc?method=saveEdits",
+                                  data : aData,
+                                  dataType : 'JSON',
+                                  method : 'POST'
+                                }).done(function( result ) {
+                                    //obviously do something different like show a nice message or something...
+                                    if( result ) {
+                                        alert('SAVED... do something else');
+                                    } else {
+                                        alert('NOT SAVED: ');
+
+                                    }
+                                });
+
                             } else {
                                 /* No edit in progress - let's start one */
                                 editRow(oTable, nRow);
