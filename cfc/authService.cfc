@@ -19,10 +19,10 @@
 	  			"roles" = ['admin','ecoflex'], //since this is an array we can.. do.. arrayFindNoCase(SESSION.auth.roles, 'admin')
 	  			"isAdmin" = true, //we'll make it easier on ourselves to know if they have admin role with this quick boolean
 	  			"userDsp" = "Administrator",
-	  			"email" = "test@test.com",
-	  			"firstName" = "Joe",
+	  			"email" = "ecoflex@test.com",
+	  			"firstName" = "Shawn",
 	  			"lastName" = "Admin",
-	  			"fullName" = "Joe Admin"
+	  			"fullName" = "Admin Tucker"
 	  		};
 	  	} else if ( userID == 'EcoFlex' && password == '12345!') {
 				var authInfo = {
