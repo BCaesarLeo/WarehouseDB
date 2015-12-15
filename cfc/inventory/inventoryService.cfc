@@ -7,17 +7,31 @@
   </cffunction>
 
   <cffunction name="getAll" access="remote" output="false" returntype="any" hint="">
-		<cfargument name="returnAs" default="query">
+    <cfargument name="returnAs" default="query">
+		<cfargument name="mode" default="search">
 
   	<cfscript>
 	  	var qInventory = "";
 	  	var rs = {};
   	</cfscript>
 
-<cfquery name="qInventory" datasource="db10">
-      SELECT SKU, MAXDESCRIPTION as Description, CONTAINERNO as Container, sum(INVQTY) as qty, dateRcvd
+    <cfset var colList = "SKU, MAXDESCRIPTION as Description, CONTAINERNO as Container, sum(INVQTY) as qty, dateRcvd">
+
+    <!--- IF EDIT MODE AND they are an Admin give them extra columns --->
+    <cfif ARGUMENTS.mode eq 'edit' AND SESSION.auth.isAdmin>
+      <cfset colList &= ",edtQty,iisEdited">
+    </cfif>
+
+    <!--- IF EDIT MODE give them the buttons was limiting to admin need to give it to all. --->
+    <cfif ARGUMENTS.mode eq 'edit'>
+      <cfset colList &= ",'<a class=""edit"" href=""##"">Edit</a>' as xEdit, '' as otherActions"> 
+    </cfif>
+
+
+    <cfquery name="qInventory">
+      SELECT #preserveSingleQuotes(colList)#
       FROM D8TA 
-      group by CONTAINERNO, SKU, MAXDESCRIPTION, dateRcvd
+      group by CONTAINERNO, SKU, MAXDESCRIPTION, dateRcvd,edtQty,iisEdited
     </cfquery>
 
 
@@ -148,10 +162,4 @@ JavaCast( "int", 1 )
 </cffunction>
 
 
-
-
-
-<cffunction>
-  
-</cffunction>
 </cfcomponent>

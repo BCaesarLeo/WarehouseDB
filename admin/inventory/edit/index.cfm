@@ -20,9 +20,12 @@
 <!--- *********************** THIS PAGE's specific javascript such as (datatables, flot, etc..) ***********************--->
 
 <cfsavecontent variable="extraJS">
+	<!--- LOAD IN DATATABLES BASICS --->
 	<script src="https://cdn.datatables.net/s/bs/dt-1.10.10/datatables.min.js" type="text/javascript" ></script>
-	<script src="/js/_core/inventory/inventorySearchDataTable.js" type="text/javascript"></script>
-	<script src="/js/table-editable.js"></script>
+	<script src="//cdn.datatables.net/buttons/1.1.0/js/dataTables.buttons.min.js" type="text/javascript" ></script>
+	<script src="//cdn.datatables.net/select/1.1.0/js/dataTables.select.min.js" type="text/javascript" ></script>
+
+	<!--- YOUR DATA TABLES DEFINITION --->
 	<script src="/js/_core/inventory/inventoryEditDataTable.js" type="text/javascript"></script>
 	<!-- END JAVASCRIPTS -->
 

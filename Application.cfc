@@ -6,6 +6,8 @@ www.coldbox.org | www.luismajano.com | www.ortussolutions.com
 Description :
 	This is the Application.cfc for usage withing the ColdBox Framework.
 ----------------------------------------------------------------------->
+
+
 <cfcomponent output="false">
 	<cfsetting enablecfoutputonly="yes">
 
@@ -23,6 +25,9 @@ Description :
         this.mappings['/includes'] = rootPath & 'includes';
         // DATASOURCE
         this.datasource = "db10";
+        
+        // Enable Robust Exception
+		this.enablerobustexception = true;
     </cfscript>
 
 	<!--- on Application Start --->

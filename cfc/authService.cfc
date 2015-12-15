@@ -16,7 +16,8 @@
 	  		var authInfo = {
 	  			"isLoggedIn" = true,
 	  			"userID" = 'admin',
-	  			"roles" = ['admin','ecoflex'],
+	  			"roles" = ['admin','ecoflex'], //since this is an array we can.. do.. arrayFindNoCase(SESSION.auth.roles, 'admin')
+	  			"isAdmin" = true, //we'll make it easier on ourselves to know if they have admin role with this quick boolean
 	  			"userDsp" = "Administrator",
 	  			"email" = "test@test.com",
 	  			"firstName" = "Joe",
@@ -28,6 +29,7 @@
 	  			"isLoggedIn" = true,
 	  			"userID" = 'EcoFlex',
 	  			"roles" = ['ecoflex'],
+	  			"isAdmin" = false,
 	  			"userDsp" = "EcoFlex",
 	  			"email" = "EcoFlex@test.com",
 	  			"firstName" = "Eco",

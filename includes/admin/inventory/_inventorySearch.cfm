@@ -25,20 +25,20 @@
 	            <table  class="display table table-bordered table-striped" id="dynamic-table">
 	            	<thead>
 			            <tr>
-		                <th>SKU No.</th>
-										<th>Description</th>
-										<th>Container</th>
-										<th class="hidden-phone">Quantity</th>
-										<th class="hidden-phone">Date Recvd</th>
+			                <th>SKU No.</th>
+							<th>Description</th>
+							<th>Container</th>
+							<th class="hidden-phone">Quantity</th>
+							<th class="hidden-phone">Date Recvd</th>
 			            </tr>
 	            	</thead>
 		            <tfoot>
 			            <tr>
-		                <th>SKU No.</th>
-								    <th>Description</th>
-								    <th>Container</th>
-								     <th colspan="" style="text-align:right">Qty:</th>
-								    <th colspan="" ></th>
+			                <th>SKU No.</th>
+						    <th>Description</th>
+						    <th>Container</th>
+						     <th colspan="" style="text-align:right">Qty:</th>
+						    <th colspan="" ></th>
 			            </tr>
 		            </tfoot>
 	            </table>
