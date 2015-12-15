@@ -1,58 +1,54 @@
- <section>
- <div class="row">
-                    <div class="col-md-3">
-                        <div class="profile-nav alt">
-                            <section class="panel text-center">
-                                <div class="user-heading alt wdgt-row terques-bg">
-                                    <i class="fa fa-user"></i>
-                                </div>
-
-                                <div class="panel-body">
-                                    <div class="wdgt-value">
-                                        <h1 class="count">25</h1>
-                                        <p>New Users</p>
-                                    </div>
-                                </div>
-
-                            </section>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="profile-nav alt">
-                            <section class="panel text-center">
-                                <div class="user-heading alt wdgt-row red-bg">
-                                    <i class="fa fa-tags"></i>
-                                </div>
-
-                                <div class="panel-body">
-                                    <div class="wdgt-value">
-                                        <h1 class="count">295</h1>
-                                        <p>Sales</p>
-                                    </div>
-                                </div>
-
-                            </section>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <section class="panel weather-box">
-                            <div class="symbol purple-bg">
-                                <i class="ico-cloudy "></i>
-                            </div>
-                            <div class="value">
-                                <i class="fa fa-map-marker"></i>
-                                <p>California</p>
-                                <br>
-                                <i class="ico-cloudy"></i>
-                                <p>Sunny day, 32OC</p>
-                            </div>
-                        </section>
-                    </div>
-                </div>
+<!--main content start-->
+<section id="main-content" >
+	<section class="wrapper">
+		<div class="row">
+			<div class="col-md-12">
+				<!--breadcrumbs start -->
+				<ul class="breadcrumb">
+					<li><a href="../index.cfm"><i class="fa fa-home"></i> Home</a></li>
+					<li class="active"><a href="/admin/receiving/"> Receiving Audit Dashboard</a></li>
+				</ul>
+				<!--breadcrumbs end -->
+			</div>
+		</div>
+		
+		<!--- Top Row --->
+	<div class="row">
+    <div class="col-md-3"><a href="/admin/receiving/audit">
+        <div class="mini-stat clearfix">
+            <span class="mini-stat-icon orange"><i class="fa fa-copy"></i></span>
+            <div class="mini-stat-info">
+                <span>AUDIT INBOUND</span>
+                Compare Packing List with Received Products.
+            </div>
+        </div></a>
+    </div>
+    <div class="col-md-3"><a href="/admin/receiving/register-inbound"> 
+        <div class="mini-stat clearfix">
+            <span class="mini-stat-icon tar"><i class="fa fa-upload"></i></span>
+            <div class="mini-stat-info">
+                <span>REGISTER INBOUND</span>
+                Register your inbound shipments with Fourway.
+            </div>
+        </div></a>
+    </div>
+    <div class="col-md-3"><a href="/admin/receiving/archive">
+        <div class="mini-stat clearfix">
+            <span class="mini-stat-icon pink"><i class="fa fa-calendar"></i></span>
+            <div class="mini-stat-info">
+                <span>INBOUND ARCHIVE</span>
+                View Past Copies of Inbound shipments to Fourway.
+            </div>
+        </div></a>
+    </div>
+   <!--- Placeholder for  another div--->
+</div>
 
 
-<cfinclude template="/includes/admin/receiving/_logs.cfm">
+    </div>
+</div>
 
-<cfinclude template="/includes/admin/receiving/_audit.cfm">
-
-<cfinclude template="/includes/admin/receiving/_inbound.cfm">
+			</div>
+		</div>
+	</section>
+</section>

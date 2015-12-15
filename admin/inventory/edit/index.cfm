@@ -23,6 +23,7 @@
 	<script src="https://cdn.datatables.net/s/bs/dt-1.10.10/datatables.min.js" type="text/javascript" ></script>
 	<script src="/js/_core/inventory/inventorySearchDataTable.js" type="text/javascript"></script>
 	<script src="/js/table-editable.js"></script>
+	<script src="/js/_core/inventory/inventoryEditDataTable.js" type="text/javascript"></script>
 	<!-- END JAVASCRIPTS -->
 
 </cfsavecontent>

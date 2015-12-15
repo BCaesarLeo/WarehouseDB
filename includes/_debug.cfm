@@ -35,18 +35,25 @@
 	<!--- <cfdump var="#_ContainerNo#"> </cfdump> --->
 
 
-<cfquery name="mInventory" datasource="db10">
-			SELECT  SKU, Description
-			FROM Audit_D8TA 
+
+<!--- create a dummy query using queryNew --->
+<!--- <cfquery name="sInventory" datasource="db10">
+    SELECT * FROM D8TA 
+</cfquery>
+<cfset writeDump(sInventory)>
+
+
+	<cfquery name="qInventory" datasource="db10">
+			SELECT SKU, MAXDESCRIPTION as Description, CONTAINERNO as Container, sum(INVQTY) as qty, dateRcvd
+			FROM D8TA 
+			group by CONTAINERNO, SKU, MAXDESCRIPTION, dateRcvd
 		</cfquery>
-		<cfoutput>
-
-HELLO
-</cfoutput>
-
-
-	<cdump var ="#mInventory#">
+		<cfset writeDump(qInventory)> --->
 <!--- *************************************** --->
+<!--- 	inventory audit cfc dumps
+<cfdump var="#exoinbound#"> </cfdump> 
+<cfdump var="#exoDisinbound#"> </cfdump> 
+<cfdump var="#exoAudit#"> </cfdump>  --->
 
 </div>
 </div>

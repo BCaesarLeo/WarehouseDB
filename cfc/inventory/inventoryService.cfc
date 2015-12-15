@@ -14,11 +14,12 @@
 	  	var rs = {};
   	</cfscript>
 
-		<cfquery name="qInventory" datasource="db10">
-			SELECT SKU, Maxdescription as Description, containerNo as Container, sum(InvQty) as qty, dateRcvd
-			FROM D8Ta 
-			group by container, SKU, description, dateRcvd
-		</cfquery>
+<cfquery name="qInventory" datasource="db10">
+      SELECT SKU, MAXDESCRIPTION as Description, CONTAINERNO as Container, sum(INVQTY) as qty, dateRcvd
+      FROM D8TA 
+      group by CONTAINERNO, SKU, MAXDESCRIPTION, dateRcvd
+    </cfquery>
+
 
 		<cfscript>
 			if ( arguments.returnAs == 'datatables') {
@@ -147,4 +148,10 @@ JavaCast( "int", 1 )
 </cffunction>
 
 
+
+
+
+<cffunction>
+  
+</cffunction>
 </cfcomponent>
