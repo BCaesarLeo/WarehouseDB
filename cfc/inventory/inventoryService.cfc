@@ -53,22 +53,20 @@
 
     <cfscript>
       //script version of dump and cfabort
-      writeDump(arguments);  //this should have prevQty in it now...then you can have everything you need to write your query in the ARGUMENTS scope
+      writeDump(arguments); // this should have prevQty in it now...then you can have everything you need to write your query in the ARGUMENTS scope
 
-      abort;
+      //abort;
     </cfscript>
 
     <!--- NOW JUST DO YOUR LOGIC HERE... however it doesn't send over the OLD value... but we can look at stashing the old qty... --->
-
-    <cfquery  name="insertData">
-      INSERT INTO EditD8TA (SKU, ContainerNo, dateRcvd, Quantity, eISEdit )
-      VALUES('<cfqueryparam value = "#arguments.SKU#" cfsqltype="CF_SQL_VARCHAR"/>',
-        '<cfqueryparam value = "#arguments.Container#" cfsqltype="CF_SQL_VARCHAR"/>',
-        '<cfqueryparam value = "#arguments.DATERCVD#" cfsqltype="CF_SQL_DATE"/>',   
-       '<cfqueryparam value = "#arguments.QTY#" cfsqltype="CF_SQL_SMALLINT"/>', 
-         '<cfqueryparam value = "#arguments.PREVQTY#" cfsqltype="CF_SQL_SMALLINT"/>'
-                     )
-    </cfquery> 
+    <cfquery  name="insertData"> <!--- Doesn't Require a name as I'm only inserting not returning --->
+      INSERT INTO Edit_D8TA (SKU, ContainerNo, dateRcvd, Quantity, eISEdit )
+      VALUES('<cfqueryparam value = #arguments.SKU# cfsqltype="CF_SQL_VARCHAR"/>',
+        '<cfqueryparam value = #arguments.Container# cfsqltype="CF_SQL_VARCHAR"/>',
+        '<cfqueryparam value = #arguments.DATERCVD# cfsqltype="CF_SQL_DATE"/>',   
+       '<cfqueryparam value = #arguments.QTY# cfsqltype="CF_SQL_SMALLINT"/>', 
+         '<cfqueryparam value = #arguments.prevQty# cfsqltype="CF_SQL_VARCHAR"/>'
+                     )  </cfquery> 
 
 
     <cfscript>

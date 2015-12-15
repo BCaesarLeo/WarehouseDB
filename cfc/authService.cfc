@@ -22,7 +22,7 @@
 	  			"email" = "ecoflex@test.com",
 	  			"firstName" = "Shawn",
 	  			"lastName" = "Admin",
-	  			"fullName" = "Admin Tucker"
+	  			"fullName" = "Fourway Administrator"
 	  		};
 	  	} else if ( userID == 'EcoFlex' && password == '12345!') {
 				var authInfo = {
