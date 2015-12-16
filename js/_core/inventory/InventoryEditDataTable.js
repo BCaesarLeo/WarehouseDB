@@ -169,10 +169,11 @@ $(document).ready(function() {
                                 nEditing = null;
                                 //get the data from the row...
                                 var aData = oTable.fnGetData(nRow);
-
+                //My attempt at making a difference var
+                var diffnQty = (prevQty-aData.qty)*-1;
                                 //now that we sent old qty back above lets add it to the data of the ajax call..
                                 aData.prevQty = prevQty;
-
+                                aData.diffnQty = diffnQty;   
                                 console.log(aData);
 
                                 $.ajax({

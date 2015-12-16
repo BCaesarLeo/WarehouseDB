@@ -15,7 +15,7 @@
 	  	var rs = {};
   	</cfscript>
 
-    <cfset var colList = "SKU, DESCRIPTION, CONTAINERNO as Container, sum(eTotal) as qty, dateRcvd">
+    <cfset var colList = "SKU, MAXDESCRIPTION as Description, CONTAINERNO as Container, sum(INVQTY) as qty, dateRcvd">
 
     <!--- IF EDIT MODE AND they are an Admin give them extra columns --->
     <cfif ARGUMENTS.mode eq 'edit' AND SESSION.auth.isAdmin>
@@ -30,8 +30,8 @@
 
     <cfquery name="qInventory">
       SELECT #preserveSingleQuotes(colList)#
-      FROM HOUSE_D8TA_Q
-      group by CONTAINERNO, SKU, DESCRIPTION, dateRcvd
+      FROM D8TA 
+      group by CONTAINERNO, SKU, MAXDESCRIPTION, dateRcvd, edtQty,iisEdited
     </cfquery>
 
 
@@ -59,15 +59,13 @@
     <!--- NOW JUST DO YOUR LOGIC HERE... however it doesn't send over the OLD value... but we can look at stashing the old qty... --->
 
     <cfquery  name="insertData"> <!--- Doesn't Require a name as I'm only inserting not returning --->
-      INSERT INTO House_D8TA (SKU, ContainerNo, description, dateRcvd, Quantity, PREVQTY, EditDate, NueQty)
+      INSERT INTO Edit_D8TA (SKU, ContainerNo, dateRcvd, Quantity, eISEdit, EditDate )
       VALUES(<cfqueryparam value = "#arguments.SKU#" cfsqltype="CF_SQL_VARCHAR"/>,
         <cfqueryparam value = "#arguments.Container#" cfsqltype="CF_SQL_VARCHAR"/>,
-           <cfqueryparam value = "#arguments.description#" cfsqltype="CF_SQL_VARCHAR"/>,
-        <cfqueryparam value = "#arguments.DATERCVD#" cfsqltype="CF_SQL_DATE"/>,  
-        <cfqueryparam value = "#arguments.diffnQty#" cfsqltype="CF_SQL_SMALLINT"/>,  
-           <cfqueryparam value = "#arguments.PREVQTY#" cfsqltype="CF_SQL_SMALLINT"/>,
-         <cfqueryparam value = "#Now()#" cfsqltype="CF_SQL_DATE"/>,
-         <cfqueryparam value = "#arguments.QTY#" cfsqltype="CF_SQL_SMALLINT"/>
+        <cfqueryparam value = "#arguments.DATERCVD#" cfsqltype="CF_SQL_DATE"/>,   
+       <cfqueryparam value = "#arguments.QTY#" cfsqltype="CF_SQL_SMALLINT"/>, 
+         <cfqueryparam value = "#arguments.PREVQTY#" cfsqltype="CF_SQL_SMALLINT"/>,
+         <cfqueryparam value = "#Now()#" cfsqltype="CF_SQL_DATE"/>
                      )  </cfquery> 
 
     <cfscript>
