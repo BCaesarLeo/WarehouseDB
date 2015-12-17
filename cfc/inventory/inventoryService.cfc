@@ -17,9 +17,10 @@
 
     <cfset var colList = "SKU, DESCRIPTION, CONTAINERNO as Container, sum(eTotal) as qty, dateRcvd">
 
-    <!--- IF EDIT MODE AND they are an Admin give them extra columns --->
+    <!--- IF EDIT MODE AND they are an Admin give them extra columns This isn't working correctly so named it 1234 cause it won't work--->
     <cfif ARGUMENTS.mode eq 'edit' AND SESSION.auth.isAdmin>
-      <cfset colList &= ",edtQty,iisEdited">
+      <cfset colList &= ",Max(EditDate) as mEditDate,Notes">
+      <!-- A Remove ,EditDate,Notes   removed from "" above--->
     </cfif>
 
     <!--- IF EDIT MODE give them the buttons was limiting to admin need to give it to all. --->
@@ -31,10 +32,15 @@
     <cfquery name="qInventory">
       SELECT #preserveSingleQuotes(colList)#
       FROM HOUSE_D8TA_Q
-      group by CONTAINERNO, SKU, DESCRIPTION, dateRcvd
+
+      group by CONTAINERNO, SKU, DESCRIPTION, dateRcvd, Notes
+        
+        
+   
     </cfquery>
 
 
+<!---   A REMOVE <cfif ARGUMENTS.mode eq 'edit' AND SESSION.auth.isAdmin> <cfoutput>,EditDate,Notes</cfoutput><cfif> --->
 		<cfscript>
 			if ( arguments.returnAs == 'datatables') {
 				rs.dt = new cfc.json.DataTables();

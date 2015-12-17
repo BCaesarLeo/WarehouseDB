@@ -7,9 +7,15 @@
             <h3 class="panel-title">Shipment Manifest Upload- Step 3 </h3>
           </div>
           <div class="panel-body">
+
     
 <cftry>
-  
+  <script>
+ $('#btn1').click(function(){
+      $('#barcode1').JsBarcode("test");
+}); 
+
+  </script>
   <!--- attempt to catch any errors--->
   <cfloop query="session.ecoflexspreadsheetupload">
     <cfquery datasource="db10" name="insertData">
@@ -32,6 +38,10 @@
           </cfcatch>
         </cftry>
        <h1 class="color-terques"> Successful Upload - Container <cfoutput>#session.ecoflexspreadsheetupload.ContainerNo[1]#</cfoutput> </h1>
+       <div class="panel">
+       <input type="button" id="btn1" value="Bar1" />
+<img id="barcode1"/>
+       </div>
         <div class="panel-body">
                         <table class="table  table-hover general-table">
                             <thead>

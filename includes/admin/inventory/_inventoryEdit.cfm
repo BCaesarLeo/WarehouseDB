@@ -18,9 +18,7 @@
                         <div class="adv-table editable-table">
                             <div class="clearfix">
                                 <div class="btn-group">
-                                    <button id="editable-sample_new" class="btn btn-primary">
-                                        Add New <i class="fa fa-plus"></i>
-                                    </button>
+                                    
                                 </div>
                                 <div class="btn-group pull-right">
                                     <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">Tools <i class="fa fa-angle-down"></i>
@@ -36,22 +34,21 @@
                             <!--- We'll put some JQUERY data on the table as meta data to pass it along to the javascript.. then super easy to get it inside JS to do an IF... --->
 
 
-                            <table id="edit-table" class="display" cellspacing="0" width="100%" data-isadmin="<cfoutput>#SESSION.auth.isAdmin#</cfoutput>"> <!--- lowercase is important here...--->
+                            <table id="edit-table" class="table table-striped table-hover table-bordered" cellspacing="0" width="100%" data-isadmin="<cfoutput>#SESSION.auth.isAdmin#</cfoutput>"> <!--- lowercase is important here...--->
                                 <thead>
                                     <tr>
                                         <!--- two blank columns to the table easier at front to add admin ones at end and not mess up positioning in js code --->
+                                        <th><i class="fa fa-edit"></i></th>
                                         <th></th>
-                                        <th></th>
-                                        <th>sku</th>
+                                        <th>Sku</th>
                                         <th>Description</th>
-                                        <th>container</th>
-                                        <th>qty</th>
-                                        <th width="18%">datercvd</th>
-                                        <!--- IF THEY ARE AN ADMIN then lets add two columns to table --->
-                                        <cfif SESSION.auth.isAdmin>
-                                            <th>edited qty</th>
-                                            <th>Manually Edited</th>
-                                        </cfif>
+                                        <th>Container</th>
+                                        <th>Quantity</th>
+                                        <th >Date Recieved</th>
+                                    
+                                            <th>Notes</th>
+                                            <th>Modified On</th>
+                                        
                                     </tr>
                                 </thead>
                             </table>

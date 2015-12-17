@@ -100,8 +100,26 @@ $(document).ready(function() {
                     { data: "description" },
                     { data: "container" },
                     { data: "qty", className: "rowDataSd" },
-                    { data: "datercvd" }
+                    { data: "datercvd" },
+                    { data: "notes" },
+                    { data: "meditdate" }
                 ];
+
+
+// PRIOR TO Edit
+
+  // var arColumns = [
+  //                   { data: "xedit" },
+  //                   { data: "otheractions" },
+  //                   { data: "sku" },
+  //                   { data: "description" },
+  //                   { data: "container" },
+  //                   { data: "qty", className: "rowDataSd" },
+  //                   { data: "datercvd" },
+  //                   { data: "notes" },
+  //                   { data: "meditdate" }
+  //               ];
+
 
                 //if admin give them 2 extra columns.. easier if they are on the end since stuff is positional based..
                 //lets scrap this for now.. too late to see what's wrong...
@@ -148,7 +166,9 @@ $(document).ready(function() {
 
                         
 
-                        $('#edit-table a.edit').on('click', function (e) {
+       
+
+                        $('#edit-table').on('click', 'a.edit', function (e) {
                             e.preventDefault();
 
                             /* Get the row as a parent of the link that was clicked on */

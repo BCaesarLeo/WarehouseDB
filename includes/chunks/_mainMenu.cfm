@@ -50,9 +50,12 @@
 								<li class="#(activeNav eq 'inventory-search') ? 'active' : ''#">
 									<a href="/admin/inventory/search">Search</a>
 								</li>
+<cfif SESSION.auth.isAdmin> 
 								<li class="#(activeNav eq 'edit-inventory') ? 'active' : ''#">
 									<a href="/admin/inventory/edit">Edit</a>
 								</li>
+							</cfif>
+
 							</ul>
 						</li>
 	        </ul>
@@ -61,3 +64,4 @@
     </div>
 </aside>
 </cfoutput>
+<!--- <cfinclude template="/includes/_debug.cfm"> --->

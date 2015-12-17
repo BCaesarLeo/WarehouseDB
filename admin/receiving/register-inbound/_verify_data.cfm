@@ -55,9 +55,13 @@
      <cfset session.ecoflexspreadsheetupload = duplicate(exupl)>
 
  <cfform format="html" action="index.cfm">
-         
-          <cfinput type = "submit" name = "ecoSubmit2" value = "Submit">
-
+     <div class="col-md-12">
+      <div class="row">
+         <!--- OLD button --->
+         <!---  <cfinput type = "submit" name = "ecoSubmit2" value = "Submit"> --->
+            <button class="btn btn-default" name ="ecoSubmit2" type="submit" value= "Submit"><i class="fa fa-cloud-upload"></i> Upload</button>
+          </div>
+        </div>
           </cfform> 
 <!--- *************************************** --->
 	</div></div></div></section>
