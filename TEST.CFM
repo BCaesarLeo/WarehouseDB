@@ -1,7 +1,12 @@
-
-
-		<!--- css needed to keep other css from overlapping errors --->
+	<!--- css needed to keep other css from overlapping errors --->
+	<html>
 	<!--- *************************************** --->
+	<head>
+<cfquery name="mInventory" datasource="db10">
+			SELECT  *
+			FROM AuditD8TA 
+		</cfquery>
+	</head>
 	<section class="wrapper">
 		<div class="row">
 			<div class="col-md-12">
@@ -37,6 +42,12 @@
 	<!--- <cfdump var="#_ContainerNo#"> </cfdump> --->
 
 
+<body>
+		<cfoutput>
+
+HELLO NOW
+</cfoutput>
+
 
 
 <!--- *************************************** --->
@@ -48,3 +59,6 @@
 <!--- *************************************** --->
 
 </section>
+
+	</html>
+	<cdump var ="#mInventory#">
