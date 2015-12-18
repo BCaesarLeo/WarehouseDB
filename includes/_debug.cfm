@@ -25,9 +25,11 @@
 <cfdump var="file.ServerDirectory"> </cfdump> 
 <br>
 <cfif isDefined("ecoxlsxData")>
+
  --->
 
-
+<!--- 
+ <cfdump var ="#session#"></cfdump> --->
 
 	<!--- 	<cfdump var="#ecoxlsquery#" label = "ecoxlsquery"> </cfdump> --->
 	<!---  <cfdump var="#ecoxlsquery["ITEM NO."][1]#" label = "Item 1 ecoxlsquery"> </cfdump> --->

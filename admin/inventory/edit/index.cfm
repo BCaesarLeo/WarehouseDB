@@ -16,10 +16,12 @@
 
 
 <!--- *********************** THIS PAGE'S INCLUDE FILE --- this is where your main logic goes for this page ***********************--->
-<cfif arrayFindNoCase( SESSION.auth.roles, 'admin')>`  
+<cfif arrayFindNoCase( SESSION.auth.roles, 'admin')>  
 <cfinclude template="/includes/admin/inventory/_inventoryEdit.cfm">
+	<cfelse>
+    <cflocation addtoken="no" url="/admin?accessDenied=1">
 </cfif>
-<cflocation addtoken="no" url="/admin?accessDenied=1" />`
+<!--- <cflocation addtoken="no" url="/admin?accessDenied=1" /> --->
 
 
 <!--- *********************** THIS PAGE's specific javascript such as (datatables, flot, etc..) ***********************--->
@@ -40,5 +42,5 @@
 
 <!--- *********************** _footer ***********************--->
 <cfinclude template="/includes/chunks/_footer.cfm">
-
+<!--- <cfinclude template="/includes/_debug.cfm"> --->
 </cfoutput>

@@ -97,7 +97,7 @@ $("#button1").click(function(event){
                                        <option value="#exoDisAudit.DateRcvd#">#DateTimeFormat(exoDisAudit.DateRcvd, "full")#</option></cfoutput>
                                  </cfloop>
                                             
-                                    
+                               </form>
 
                                     </select>
                                 </div>

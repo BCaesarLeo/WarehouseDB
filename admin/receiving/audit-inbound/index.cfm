@@ -12,7 +12,7 @@
 
 
 <!--- *********************** THIS PAGE'S INCLUDE FILE --- this is where your main logic goes for this page ***********************--->
-<cfinclude template="/includes/admin/receiving/_receivingLatestAudit.cfm">
+<cfinclude template="/includes/admin/receiving/_receivingAudit.cfm">
 
 <!--- *********************** THIS PAGE's specific javascript such as (datatables, flot, etc..) ***********************--->
 <cfsavecontent variable="extraJS">

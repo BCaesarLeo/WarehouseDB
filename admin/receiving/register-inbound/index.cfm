@@ -41,7 +41,7 @@
 <!-- The File Upload user interface plugin -->
 <script src="/js/file-uploader/js/jquery.fileupload-ui.js"></script>
 <!--Barcode Generator--->
-<script src="/js/JsBarcode.all.min.js"></script>
+<script src="/js/jquery-barcode.js"></script>
 	</cfsavecontent>
 
 <!--- *********************** _coreJavaScript ***********************--->

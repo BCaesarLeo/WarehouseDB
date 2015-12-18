@@ -71,8 +71,36 @@
  </cffunction>
 
 
+<!--- PASTE FROM EXAMPLE --->
 
 
+ <!--- 
+    <cfquery name="event_list" dataSource="db9">
+          SELECT DISTINCT nDate as competition_date, nEvent as event_name
+          FROM nDataAll
+          WHERE nDate >= <cfqueryparam cfsqltype="cf_sql_date" value="#application.nseason#" />
 
+          ORDER BY nDate DESC
+        </cfquery>
+
+    <!---   <cfdump var="#event_list#"> 
+ --->
+<!-- Attempt to get date from url and pass to query--->
+
+<!--Help from aaron_stooddard  to make this into cfscript that works
+
+  <cfif structkeyExists(url,'event_date')>
+<cfscript>
+qryGetEventResults = new Query(
+        datasource="db9",
+        sql = "
+        SELECT *
+        FROM nDataAll
+        WHERE nDate=:eventDate
+        ");    
+        qryGetEventResults.addParam(name="eventDate",value=event_date, cfsqltype="cf_sql_timestamp");
+        aEvent = qryGetEventResults.execute().getResult();
+       
+</cfscript> ---> 
 
 </cfcomponent>

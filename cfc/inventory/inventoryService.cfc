@@ -19,7 +19,7 @@
 
     <!--- IF EDIT MODE AND they are an Admin give them extra columns This isn't working correctly so named it 1234 cause it won't work--->
     <cfif ARGUMENTS.mode eq 'edit' AND SESSION.auth.isAdmin>
-      <cfset colList &= ",Max(EditDate) as mEditDate,Notes">
+      <cfset colList &= ",Max(MostRcntEdit) as mEditDate,Notes">
       <!-- A Remove ,EditDate,Notes   removed from "" above--->
     </cfif>
 
