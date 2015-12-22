@@ -1,7 +1,15 @@
+<!---  attempt to take javascript from index and set it in cfc--- not working
+  <cfinvoke component="cfc.inventory.barcode" method="genbarcode" returnvariable="exbar">
+ --->
 <section id="main-content">
   <section class="wrapper">
     <div class="row">
       <div class="col-md-12">
+        <ul class="breadcrumb">
+              <li><a href="../../"><i class="fa fa-home"></i> Home</a></li>
+              <li><a href="/admin/receiving/">Receiving Audits</a></li>
+              <li class="active">Register Inbound</li>
+          </ul>
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Shipment Manifest Upload- Step 3 </h3>
@@ -10,83 +18,9 @@
 
     
 <cftry>
-  <script>
-$("#demox").barcode(
-"1234567890128", // Value barcode (dependent on the type of barcode)
-"ean13" // type (string)
-);     
-  </script>
 
-  <script>
-  <script type="text/javascript">
-    
-      function generateBarcode(){
-        var value = $("#barcodeValue").val();
-        var btype = $("input[name=btype]:checked").val();
-        var renderer = $("input[name=renderer]:checked").val();
-        
-    var quietZone = false;
-        if ($("#quietzone").is(':checked') || $("#quietzone").attr('checked')){
-          quietZone = true;
-        }
-    
-        var settings = {
-          output:renderer,
-          bgColor: $("#bgColor").val(),
-          color: $("#color").val(),
-          barWidth: $("#barWidth").val(),
-          barHeight: $("#barHeight").val(),
-          moduleSize: $("#moduleSize").val(),
-          posX: $("#posX").val(),
-          posY: $("#posY").val(),
-          addQuietZone: $("#quietZoneSize").val()
-        };
-        if ($("#rectangular").is(':checked') || $("#rectangular").attr('checked')){
-          value = {code:value, rect: true};
-        }
-        if (renderer == 'canvas'){
-          clearCanvas();
-          $("#barcodeTarget").hide();
-          $("#canvasTarget").show().barcode(value, btype, settings);
-        } else {
-          $("#canvasTarget").hide();
-          $("#barcodeTarget").html("").show().barcode(value, btype, settings);
-        }
-      }
-          
-      function showConfig1D(){
-        $('.config .barcode1D').show();
-        $('.config .barcode2D').hide();
-      }
-      
-      function showConfig2D(){
-        $('.config .barcode1D').hide();
-        $('.config .barcode2D').show();
-      }
-      
-      function clearCanvas(){
-        var canvas = $('#canvasTarget').get(0);
-        var ctx = canvas.getContext('2d');
-        ctx.lineWidth = 1;
-        ctx.lineCap = 'butt';
-        ctx.fillStyle = '#FFFFFF';
-        ctx.strokeStyle  = '#000000';
-        ctx.clearRect (0, 0, canvas.width, canvas.height);
-        ctx.strokeRect (0, 0, canvas.width, canvas.height);
-      }
-      
-      $(function(){
-        $('input[name=btype]').click(function(){
-          if ($(this).attr('id') == 'datamatrix') showConfig2D(); else showConfig1D();
-        });
-        $('input[name=renderer]').click(function(){
-          if ($(this).attr('id') == 'canvas') $('#miscCanvas').show(); else $('#miscCanvas').hide();
-        });
-        generateBarcode();
-      });
-  
-    </script>
-  </script>
+
+ 
   <!--- attempt to catch any errors--->
   <cfloop query="session.ecoflexspreadsheetupload">
     <cfquery datasource="db10" name="insertData">
@@ -110,7 +44,10 @@ $("#demox").barcode(
         </cftry>
        <h1 class="color-terques"> Successful Upload - Container <cfoutput>#session.ecoflexspreadsheetupload.ContainerNo[1]#</cfoutput> </h1>
        <div class="panel">
-<div id="demox"></div>
+        
+  <div id="bcTarget"></div> 
+
+  
        </div>
         <div class="panel-body">
                         <table class="table  table-hover general-table">

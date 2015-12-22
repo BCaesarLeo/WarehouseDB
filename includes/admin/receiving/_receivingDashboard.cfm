@@ -14,7 +14,7 @@
 		
 		<!--- Top Row --->
 	<div class="row">
-    <div class="col-md-3"><a href="/admin/receiving/audit">
+    <div class="col-md-3"><a href="/admin/receiving/audit-inbound">
         <div class="mini-stat clearfix">
             <span class="mini-stat-icon orange"><i class="fa fa-copy"></i></span>
             <div class="mini-stat-info">

@@ -4,13 +4,14 @@
 	<cfset authInfo = APPLICATION.authService.doLogin( userID = FORM.userID, password = FORM.password)>
 	
 	<!--- IF LOGIN is successful  --->
-	<cfif authInfo.isLoggedIn>
+	<cfif structKeyExists(authInfo, 'isLoggedIn') && authInfo.isLoggedIn>
 		<!--- SET auth info into session. you will use this to check their roles and whether they are logged in on each request in on-request start and redirect to log-in if not. --->
 		<cfset SESSION.auth = authInfo>
 		<!--- redirect them to admin --->
 		<cflocation url="/admin/dashboard/" addtoken="false" />
 
-
+	<cfelse>
+		<cflocation url="/?invalidLogin=1" addtoken="false"  />
 	</cfif>
 
 <cfelse>

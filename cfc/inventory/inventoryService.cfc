@@ -94,7 +94,7 @@
     <cffile action="Upload"
     filefield="ecoDataFile"
     destination="#strInExcel#"
-    nameconflict="Overwrite" >
+    nameconflict="Error" >
     <cfset upFileDir=file.ServerDirectory>
       <cfset upNSFile=file.ServerFile>
         <cfset prodThumbExt=file.serverfileext>

@@ -57,6 +57,16 @@
 <cfdump var="#exoDisinbound#"> </cfdump> 
 <cfdump var="#exoAudit#"> </cfdump>  --->
 
+<!--- working barcode! --->
+
+
+
+
+
+	<cfdump var="#exoDisInbound#">
+
+
+
 </div>
 </div>
 </div>

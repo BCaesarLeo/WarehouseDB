@@ -30,35 +30,35 @@
 		                <span class="alert-icon"><i class="fa fa-envelope-o"></i></span>
 		                <div class="notification-info">
 		                    <ul class="clearfix notification-meta">
-		                        <li class="pull-left notification-sender"><span><a href="#">Jonathan Smith</a></span> send you a mail </li>
+		                        <li class="pull-left notification-sender"><span><a href="#">Fourway Warehouse</a></span> uploaded Shipment Data </li>
 		                        <li class="pull-right notification-time">1 min ago</li>
 		                    </ul>
 		                    <p>
-		                        Urgent meeting for next proposal
+		                        Scan Date 12/22/2015
 		                    </p>
 		                </div>
 		            </div>
 		            <div class="alert alert-danger">
-		                <span class="alert-icon"><i class="fa fa-facebook"></i></span>
+		                <span class="alert-icon"><i class="fa fa-bell-o"></i></span>
 		                <div class="notification-info">
 		                    <ul class="clearfix notification-meta">
-		                        <li class="pull-left notification-sender"><span><a href="#">Jonathan Smith</a></span> mentioned you in a post </li>
+		                        <li class="pull-left notification-sender"><span><a href="#">Fourway Warehouse</a></span> added New Items to Inventory</li>
 		                        <li class="pull-right notification-time">7 Hours Ago</li>
 		                    </ul>
 		                    <p>
-		                        Very cool photo jack
+		                       Scan Date 12/22/2015
 		                    </p>
 		                </div>
 		            </div>
 		            <div class="alert alert-success ">
-		                <span class="alert-icon"><i class="fa fa-comments-o"></i></span>
+		                <span class="alert-icon"><i class="fa fa-bell-o"></i></span>
 		                <div class="notification-info">
 		                    <ul class="clearfix notification-meta">
-		                        <li class="pull-left notification-sender">You have 5 message unread</li>
+		                        <li class="pull-left notification-sender">Fourway Warehouse</li>
 		                        <li class="pull-right notification-time">1 min ago</li>
 		                    </ul>
 		                    <p>
-		                        <a href="#">Anjelina Mewlo, Jack Flip</a> and <a href="#">3 others</a>
+		                        <a href="#">Shipped Essentials Wooden Bookcase</a> and <a href="#">3 others</a>
 		                    </p>
 		                </div>
 		            </div>
@@ -66,11 +66,11 @@
 		                <span class="alert-icon"><i class="fa fa-bell-o"></i></span>
 		                <div class="notification-info">
 		                    <ul class="clearfix notification-meta">
-		                        <li class="pull-left notification-sender">Domain Renew Deadline 7 days ahead</li>
+		                        <li class="pull-left notification-sender">Container TCLU 595703-5 </li>
 		                        <li class="pull-right notification-time">5 Days Ago</li>
 		                    </ul>
 		                    <p>
-		                        Next 5 July Thursday is the last day
+		                      Inbound with 500 items
 		                    </p>
 		                </div>
 		            </div>

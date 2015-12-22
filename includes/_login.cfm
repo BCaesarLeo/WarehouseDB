@@ -9,16 +9,22 @@
     <h2 class="form-signin-heading">sign in now</h2>
 
     <div class="login-wrap">
+        <cfif structKeyExists(URL,"invalidLogin")>
+            <div>
+                INVALID LOGIN
+            </div>
+        </cfif>
         <div class="user-login-info">
             <input name="userID" type="text" class="form-control" placeholder="User ID" autofocus>
             <input name="password" type="password" class="form-control" placeholder="Password">
         </div>
 
-        <label class="checkbox">
+<!--- Remember Me and Forgot Password Button --->      
+  <label class="checkbox">
             <input type="checkbox" value="remember-me"> Remember me
             <span class="pull-right">
-                <a data-toggle="modal" href="##forgotPassModal"> Forgot Password?</a>
-            </span>
+<!---                 <a data-toggle="modal" href="##forgotPassModal"> Forgot Password?</a>
+ --->            </span>
         </label>
         <button class="btn btn-lg btn-login btn-block" type="submit">Sign in</button>
 

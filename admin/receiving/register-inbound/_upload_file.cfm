@@ -8,6 +8,11 @@
     <section class="wrapper">
         <div class="row">
             <div class="col-md-12">
+                <ul class="breadcrumb">
+              <li><a href="../../"><i class="fa fa-home"></i> Home</a></li>
+              <li><a href="/admin/receiving/">Receiving Audits</a></li>
+              <li class="active">Register Inbound</li>
+          </ul>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Register Inbound Shipment </h3>
@@ -27,14 +32,14 @@
                                     <span class="btn btn-success fileinput-button">
                                     <i class="glyphicon glyphicon-plus"></i>
                                     <span>Add files...</span>
-                                     <input type="file" name="ecoDataFile">
+                                     <input type="file" name="ecoDataFile" required accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" >
                               
                                     </span>
                                     <button type="submit" name="ecoSubmit1" class="btn btn-primary start">
                                         <i class="glyphicon glyphicon-upload"></i>
                                         <span>Start upload</span>
                                     </button>
-                                    
+                                  
                                     <!-- The global file processing state -->
                                     <span class="fileupload-process"></span>
                                 </div>
