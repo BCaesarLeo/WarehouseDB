@@ -22,7 +22,8 @@ Description :
         this.mappings['/cfc'] = rootPath & 'cfc';
         this.mappings['/includes'] = rootPath & 'includes';
         // DATASOURCE
-        this.datasource = "db10";
+       
+		this.datasource={name='db11', username="bc992164", password="Bc992164!"};
     </cfscript>
 
 	<!--- on Application Start --->

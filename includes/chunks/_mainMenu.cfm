@@ -58,6 +58,37 @@
 
 							</ul>
 						</li>
+						<!--- ORDERS--->
+	    			<cfset arOrderSections = ['orders', 'order-entry', 'order-pick', 'order-search', 'edit-order']>
+	    			<li class="sub-menu">
+
+							<a href="javascript:;" class="#( arrayFind(arOrderSections, activeNav) ) ? 'active' : ''#">
+							    <i class="fa fa-shopping-cart"></i>
+							    <span>Orders</span>
+							</a>
+							<ul class="sub">
+								<li class="#(activeNav eq 'orders') ? 'active' : ''#">
+									<a href="/admin/orders/">Dashboard</a>
+								</li>
+								<li class="#(activeNav eq 'order-entry') ? 'active' : ''#">
+									<a href="/admin/orders/entry/">Order Entry</a>
+								</li>
+								<li class="#(activeNav eq 'order-search') ? 'active' : ''#">
+									<a href="/admin/orders/search/">Order Search</a>
+								</li>
+<cfif SESSION.auth.isAdmin> 
+
+								<li class="#(activeNav eq 'order-pick') ? 'active' : ''#">
+									<a href="/admin/orders/pick/">Order Pick/Pack/Ship</a>
+								</li>
+							
+								<li class="#(activeNav eq 'edit-order') ? 'active' : ''#">
+									<a href="/admin/orders/edit/">Order Edit</a>
+								</li>
+							</cfif>
+
+							</ul>
+						</li>
 	        </ul>
         </div>        
         <!-- sidebar menu end-->

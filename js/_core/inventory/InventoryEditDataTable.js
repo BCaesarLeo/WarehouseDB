@@ -40,7 +40,7 @@ $(document).ready(function() {
                     //jqTds[3].innerHTML = '<input type="text" class="form-control small" value="' + aData['description'] + '">';
                     //jqTds[4].innerHTML = '<input type="text" class="form-control small" value="' + aData['container'] + '">';
                     jqTds[5].innerHTML = '<input type="text" class="form-control small" value="' + aData['qty'] + '">';
-
+                    // jqTds[7].innerHTML = '<input type="text" class="form-control small" value="' + aData['LocID'] + '">';
                     //register the cancel click once the item is created
                     $('#edit-table a.cancel').on('click', function (e) {
                         e.preventDefault();
@@ -73,7 +73,7 @@ $(document).ready(function() {
                     //qty field.. position matters in this code..
                     //since we only have one editable field at the moment this is input 0 .. if you added others you would adjust the indexes accordingly...
                     oTable.fnUpdate(jqInputs[0].value, nRow, 5, false); 
-
+                    // oTable.fnUpdate(jqInputs[1].value, nRow, 7, false);
                     oTable.fnDraw();
 
                     //lets return the old qty here so we can pass it along with the data...
@@ -87,6 +87,7 @@ $(document).ready(function() {
                     //oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
                     //oTable.fnUpdate(jqInputs[4].value, nRow, 4, false);
                     oTable.fnUpdate(jqInputs[0].value, nRow, 5, false);
+                     // oTable.fnUpdate(jqInputs[1].value, nRow, 7, false);
                     oTable.fnDraw();
                 }
 
@@ -101,7 +102,7 @@ $(document).ready(function() {
                     { data: "container" },
                     { data: "qty", className: "rowDataSd" },
                     { data: "datercvd" },
-                    { data: "notes" },
+                    { data: "locid" },
                     { data: "meditdate" }
                 ];
 

@@ -23,7 +23,7 @@
  
   <!--- attempt to catch any errors--->
   <cfloop query="session.ecoflexspreadsheetupload">
-    <cfquery datasource="db10" name="insertData">
+    <cfquery name="insertData">
       INSERT INTO Inbound_D8TA (SKU, Description, Quantity, ContainerNo, ContainerRegDate   )
       VALUES('#session.ecoflexspreadsheetupload.Col_1#','#session.ecoflexspreadsheetupload.Col_2#', '#session.ecoflexspreadsheetupload.Col_3#','#session.ecoflexspreadsheetupload.CONTAINERNO#', <cfqueryparam value = "#session.ecoflexspreadsheetupload.CONTAINERREGDATE#" cfsqltype="CF_SQL_DATE"/>
      

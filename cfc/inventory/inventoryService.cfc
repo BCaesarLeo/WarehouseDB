@@ -19,7 +19,7 @@
 
     <!--- IF EDIT MODE AND they are an Admin give them extra columns This isn't working correctly so named it 1234 cause it won't work--->
     <cfif ARGUMENTS.mode eq 'edit' AND SESSION.auth.isAdmin>
-      <cfset colList &= ",Max(MostRcntEdit) as mEditDate,Notes">
+      <cfset colList &= ",Max(MostRcntEdit) as mEditDate,LocID">
       <!-- A Remove ,EditDate,Notes   removed from "" above--->
     </cfif>
 
@@ -33,14 +33,14 @@
       SELECT #preserveSingleQuotes(colList)#
       FROM HOUSE_D8TA_Q
 
-      group by CONTAINERNO, SKU, DESCRIPTION, dateRcvd, Notes
+      group by CONTAINERNO, SKU, DESCRIPTION, dateRcvd, LOCID
         
         
    
     </cfquery>
 
 
-<!---   A REMOVE <cfif ARGUMENTS.mode eq 'edit' AND SESSION.auth.isAdmin> <cfoutput>,EditDate,Notes</cfoutput><cfif> --->
+<!---   A REMOVE <cfif ARGUMENTS.mode eq 'edit' AND SESSION.auth.isAdmin> <cfoutput>,EditDate,LOCID</cfoutput><cfif> --->
 		<cfscript>
 			if ( arguments.returnAs == 'datatables') {
 				rs.dt = new cfc.json.DataTables();
@@ -65,7 +65,7 @@
     <!--- NOW JUST DO YOUR LOGIC HERE... however it doesn't send over the OLD value... but we can look at stashing the old qty... --->
 
     <cfquery  name="insertData"> <!--- Doesn't Require a name as I'm only inserting not returning --->
-      INSERT INTO House_D8TA (SKU, ContainerNo, description, dateRcvd, Quantity, PREVQTY, EditDate, NueQty)
+      INSERT INTO House_D8TA (SKU, ContainerNo, description, dateRcvd, Quantity, PREVQTY, EditDate, NueQty, LOCID)
       VALUES(<cfqueryparam value = "#arguments.SKU#" cfsqltype="CF_SQL_VARCHAR"/>,
         <cfqueryparam value = "#arguments.Container#" cfsqltype="CF_SQL_VARCHAR"/>,
            <cfqueryparam value = "#arguments.description#" cfsqltype="CF_SQL_VARCHAR"/>,
@@ -73,7 +73,8 @@
         <cfqueryparam value = "#arguments.diffnQty#" cfsqltype="CF_SQL_SMALLINT"/>,  
            <cfqueryparam value = "#arguments.PREVQTY#" cfsqltype="CF_SQL_SMALLINT"/>,
          <cfqueryparam value = "#Now()#" cfsqltype="CF_SQL_DATE"/>,
-         <cfqueryparam value = "#arguments.QTY#" cfsqltype="CF_SQL_SMALLINT"/>
+         <cfqueryparam value = "#arguments.QTY#" cfsqltype="CF_SQL_SMALLINT"/>,
+          <cfqueryparam value = "#arguments.LOCID#" cfsqltype="CF_SQL_VARCHAR"/>
                      )  </cfquery> 
 
     <cfscript>
@@ -89,24 +90,33 @@
 	<!--- define temp filelocation --->
 <cfset strDir=GetDirectoryFromPath(ExpandPath("*.*")) & "file_uploads">
   <cfset strInExcel=strDir>
-
+<cftry>
+  
     <!--- upload file --->
     <cffile action="Upload"
     filefield="ecoDataFile"
     destination="#strInExcel#"
-    nameconflict="Error" >
+    nameconflict="Error" > 
+
+    <!--- Error Page that outputs cfcache message --->
+  <cfcatch>
+<cfinclude template="/includes/_error.cfm">
+
+<cfabort>
+</cfcatch>
+  </cftry>
+
     <cfset upFileDir=file.ServerDirectory>
       <cfset upNSFile=file.ServerFile>
         <cfset prodThumbExt=file.serverfileext>
           <cfif (prodThumbExt neq "xlsx")>
-            Please Correct 
-            .xlsx file only
-            <cfabort>
+         
             </cfif>
   <cffile action="read"
             file="#upFileDir#/#upNSFile#"
             variable="strCSV">
-
+          
+          
 
 <!--- NEW EXCEL READ --->
 <cfspreadsheet action="read" src="#upFileDir#/#upNSFile#" query="ecoxlsxData" excludeHeaderRow = "true">
@@ -144,7 +154,8 @@
  <cfloop  index="CurrentRow" from="#ecoxlsquery.recordCount#" to ="1" step ="-1">
  	<cfset str = ecoxlsquery["col_1"][CurrentRow]/>
  	<!--- This is the code that finds if it starts with 4 --->
- 	<cfif Not str.startsWith("4")>
+  <!--- added checks to see if also E is first or 3 --->
+ 	<cfif Not str.startsWith("4") and Not str.startsWith("E4") and Not str.startsWith("E5") and Not str.startsWith("E6") and Not str.startsWith("E7") and  Not str.startsWith("3")>
 
 	 	<!--- Ensure record not 0--->
 <cfif (ecoxlsquery.recordCount NEQ 0)>

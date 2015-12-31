@@ -114,38 +114,39 @@
   </cffunction>
 
 
-  <!--- Method that gets Data where argument passed in matches Containerno --->
-
-<cffunction name="getInboundDatabyContainer" access="remote" output="false" returntype="any" hint="Gets Data from Inbound Spreadsheets">
-
+  <cffunction name="getInbound" access="remote" output="false" returntype="any" hint="Get Container">
   <cfargument name="returnAs" default="query">
-
-<cfargument name="selContainer" required="true" />
-
-<!--- Scope variables  --->
-
-<cfset var qInboundDataContainer = "">
-
-<!--- cfquery =name "qInboundData" datasource="db10" - Doesn't need datasource as it's defined in application --->
-
-<cfquery name="qInboundDataContainer">
-
-
-
-       SELECT SKU, description, containerno, sum(Quantity) as qty, ContainerRegDate 
+  <!--- Scope variables  --->
+<cfset var qInbound = "">
+<cfquery name="qInbound">
+       SELECT  SKU, containerno, CONTAINERREGDATE, Quantity, Description
        FROM Inbound_D8TA
-       WHERE  CONTAINERNO = <cfqueryparam value="#trim(ARGUMENTS.selContainer)#" cfsqltype="cf_sql_varchar" />
-       group by containerno, SKU, description, ContainerRegDate 
+       group by SKU, containerno, CONTAINERREGDATE, Description
+       ORDER BY SKU DESC
      </cfquery>
 
 
+<cfreturn qInbound>
+ </cffunction>
+
+
+<!--- Method that gets Data where argument passed in matches Containerno --->
+<cffunction name="getInboundDatabyContainer" access="remote" output="false" returntype="any" hint="Gets Data from Inbound Spreadsheets">
+  <cfargument name="returnAs" default="query">
+<cfargument name="finputcontainer" required="false" default="containerno">
+<!--- Scope variables  --->
+<cfset var qInboundDataContainer = "">
+<!--- cfquery =name "qInboundData" datasource="db10" - Doesn't need datasource as it's defined in application --->
+<cfquery name="qInboundDataContainer">
+
+       SELECT SKU, description, containerno, sum(Quantity) as qty, ContainerRegDate 
+       FROM Inbound_D8TA
+       group by containerno, SKU, description, ContainerRegDate 
+       WHERE #arguments.finputcontainer# = Containerno
+     </cfquery>
 
 <cfreturn qInboundDataContainer>
 
 
-
-
-
 </cffunction>
-
 </cfcomponent>
