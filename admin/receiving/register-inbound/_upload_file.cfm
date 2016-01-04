@@ -1,5 +1,5 @@
  <cfsetting requesttimeout="4600"></cfsetting>
-
+<cfset exoDisInbound = APPLICATION.inventoryAuditObj.getDistinctInbound()>
 
 <cfparam name="ecoDataFile" default=""></cfparam>
 
@@ -79,6 +79,39 @@
                      
 
                     </div>
+                </div>
+                    <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Inbound History </h3>
+                    </div>
+                    <div class="panel-body">
+                        <h2 class="lead">Inbound Shipment History</h2>
+                        <ul class="list-inline">
+                                          <cfloop query="exoDisInbound"><cfoutput>            
+                                            <li>
+                                               
+                                            <a href="items.cfm?container_No=#URLEncodedFormat(ContainerNo)#"> #ContainerNo#</a>
+                                            </li>
+                                            </cfoutput>    </cfloop>
+                        </ul>
+                        <br>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Notes</h3>
+                            </div>
+                            <div class="panel-body">
+                                <ul>
+                                    <li>Click on Inbound Shipment Names to View</li>
+                                    <li>Row 2 Should Include the  (<strong>Container No.</strong>) </li>
+                                    <li>Headers need to be Item/ Description/ Quantity <strong></strong> </li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                     
+
+                    </div>
+                
                 </div>
             </div>
 

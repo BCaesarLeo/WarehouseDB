@@ -6,7 +6,7 @@
 
   </cffunction>
 
-  <cffunction name="getAll" access="remote" output="false" returntype="any" hint="">
+  <cffunction name="getAll" access="remote" output="false" returntype="any" hint="Data for Inventory Datatable">
     <cfargument name="returnAs" default="query">
 		<cfargument name="mode" default="search">
 
@@ -15,11 +15,11 @@
 	  	var rs = {};
   	</cfscript>
 
-    <cfset var colList = "SKU, DESCRIPTION, CONTAINERNO as Container, sum(eTotal) as qty, dateRcvd">
+    <cfset var colList = "SKU, DESCRIPTION, CONTAINERNO as Container,eLocID, sum(Quantity) as qty, dateRcvd">
 
     <!--- IF EDIT MODE AND they are an Admin give them extra columns This isn't working correctly so named it 1234 cause it won't work--->
     <cfif ARGUMENTS.mode eq 'edit' AND SESSION.auth.isAdmin>
-      <cfset colList &= ",Max(MostRcntEdit) as mEditDate,LocID">
+      <cfset colList &= ",Max(MostRcntEdit) as mEditDate">
       <!-- A Remove ,EditDate,Notes   removed from "" above--->
     </cfif>
 
@@ -28,19 +28,24 @@
       <cfset colList &= ",'<a class=""edit"" href=""##"">Edit</a>' as xEdit, '' as otherActions"> 
     </cfif>
 
-
+<!--- I had to wrap the query and do this method  http://stackoverflow.com/questions/8370114/ to get where clause to work --->
     <cfquery name="qInventory">
+    SELECT
+   *
+FROM
+(
       SELECT #preserveSingleQuotes(colList)#
       FROM HOUSE_D8TA_Q
+      <!--- WHERE  SKU LIKE 4151  ---> 
+      <!--- WHERE (Sum(Quantity) = 0)--->
+      group by CONTAINERNO, SKU, DESCRIPTION, dateRcvd, eLocID
+)
+as Innertable
+WHERE qty <> 0
+   </cfquery>
 
-      group by CONTAINERNO, SKU, DESCRIPTION, dateRcvd, LOCID
-        
-        
-   
-    </cfquery>
 
-
-<!---   A REMOVE <cfif ARGUMENTS.mode eq 'edit' AND SESSION.auth.isAdmin> <cfoutput>,EditDate,LOCID</cfoutput><cfif> --->
+<!---   A REMOVE <cfif ARGUMENTS.mode eq 'edit' AND SESSION.auth.isAdmin> <cfoutput>,EditDate,eLocID</cfoutput><cfif> --->
 		<cfscript>
 			if ( arguments.returnAs == 'datatables') {
 				rs.dt = new cfc.json.DataTables();
@@ -52,9 +57,55 @@
 				return qInventory;
 			}
 		</cfscript>
-
   </cffunction>
 
+
+<cffunction name="getAllw0" access="remote" output="false" returntype="any" hint="Data for Edit Datatable">
+    <cfargument name="returnAs" default="query">
+    <cfargument name="mode" default="search">
+
+    <cfscript>
+      var qInventory = "";
+      var rs = {};
+    </cfscript>
+
+    <cfset var colList = "SKU, DESCRIPTION, CONTAINERNO as Container, sum(Quantity) as qty, dateRcvd">
+
+    <!--- IF EDIT MODE AND they are an Admin give them extra columns This isn't working correctly so named it 1234 cause it won't work--->
+    <cfif ARGUMENTS.mode eq 'edit' AND SESSION.auth.isAdmin>
+      <cfset colList &= ",Max(MostRcntEdit) as mEditDate,eLocID">
+      <!-- A Remove ,EditDate,Notes   removed from "" above--->
+    </cfif>
+
+    <!--- IF EDIT MODE give them the buttons was limiting to admin need to give it to all. --->
+    <cfif ARGUMENTS.mode eq 'edit'>
+      <cfset colList &= ",'<a class=""edit"" href=""##"">Edit</a>' as xEdit, '' as otherActions"> 
+    </cfif>
+
+<!--- I had to wrap the query and do this method  http://stackoverflow.com/questions/8370114/ to get where clause to work --->
+    <cfquery name="qInventory">
+      SELECT #preserveSingleQuotes(colList)#
+      FROM HOUSE_D8TA_Q
+      <!--- WHERE  SKU LIKE 4151  ---> 
+      <!--- WHERE (Sum(Quantity) = 0)--->
+      group by CONTAINERNO, SKU, DESCRIPTION, dateRcvd, eLocID
+   </cfquery>
+
+
+<!---   A REMOVE <cfif ARGUMENTS.mode eq 'edit' AND SESSION.auth.isAdmin> <cfoutput>,EditDate,eLocID</cfoutput><cfif> --->
+    <cfscript>
+      if ( arguments.returnAs == 'datatables') {
+        rs.dt = new cfc.json.DataTables();
+        rs.dt.setDataKeys( true );
+        rs.dt.setData( qInventory );
+
+        return rs.dt.$renderData();
+      } else {
+        return qInventory;
+      }
+    </cfscript>
+
+  </cffunction>
   <cffunction name="saveEdits" access="remote" output="false" returntype="any" hint="">
 
     <cfscript>
@@ -63,19 +114,24 @@
       //abort;
     </cfscript>
     <!--- NOW JUST DO YOUR LOGIC HERE... however it doesn't send over the OLD value... but we can look at stashing the old qty... --->
+<cftry>
+  
 
     <cfquery  name="insertData"> <!--- Doesn't Require a name as I'm only inserting not returning --->
-      INSERT INTO House_D8TA (SKU, ContainerNo, description, dateRcvd, Quantity, PREVQTY, EditDate, NueQty, LOCID)
+      INSERT INTO House_D8TA (SKU, ContainerNo,  dateRcvd, Quantity, PREVQTY, EditDate, NueQty, eLocID)
       VALUES(<cfqueryparam value = "#arguments.SKU#" cfsqltype="CF_SQL_VARCHAR"/>,
         <cfqueryparam value = "#arguments.Container#" cfsqltype="CF_SQL_VARCHAR"/>,
-           <cfqueryparam value = "#arguments.description#" cfsqltype="CF_SQL_VARCHAR"/>,
         <cfqueryparam value = "#arguments.DATERCVD#" cfsqltype="CF_SQL_DATE"/>,  
         <cfqueryparam value = "#arguments.diffnQty#" cfsqltype="CF_SQL_SMALLINT"/>,  
            <cfqueryparam value = "#arguments.PREVQTY#" cfsqltype="CF_SQL_SMALLINT"/>,
          <cfqueryparam value = "#Now()#" cfsqltype="CF_SQL_DATE"/>,
-         <cfqueryparam value = "#arguments.QTY#" cfsqltype="CF_SQL_SMALLINT"/>,
-          <cfqueryparam value = "#arguments.LOCID#" cfsqltype="CF_SQL_VARCHAR"/>
+         <cfqueryparam value = "#arguments.Qty#" cfsqltype="CF_SQL_SMALLINT"/>,
+         <cfqueryparam value = "#arguments.eLocID#" cfsqltype="CF_SQL_VARCHAR"/>
                      )  </cfquery> 
+<cfcatch>
+  <cflocation url="/admin/error.cfm" >
+</cfcatch>
+</cftry>
 
     <cfscript>
       return true;
@@ -205,4 +261,34 @@ JavaCast( "int", 1 )
 </cffunction>
 
 
+<!--- Testing function --->
+
+<cffunction name="getInnbound" access="remote" output="false" returntype="any" hint="">
+   <cfargument name="searchPhrase" />
+   <!--- Scope Define variables  --->
+<cfset var getInq = "">
+<cfset var getInquArray = arrayNew(1) />
+
+  <cfquery name="getInq" maxrows="5">
+    SELECT SKU, MaxDescription
+    FROM masterinventory
+    WHERE     LOWER(SKU) LIKE <cfqueryparam cfsqltype='cf_sql_varchar' value="%#LCASE(arguments.searchPhrase)#%" />
+    ORDER BY  SKU
+  </cfquery>
+
+
+
+
+<!--- Build result array --->
+<cfloop query="getInq">
+<cfset returnStruct = StructNew() />
+<cfset returnStruct["label"] = SKU/>
+<cfset returnStruct["value"] = MaxDescription />
+
+<cfset ArrayAppend(getInquArray,returnStruct) />
+</cfloop>
+       
+   <cfreturn serializeJSON(getInquArray) />
+     
+</cffunction>
 </cfcomponent>

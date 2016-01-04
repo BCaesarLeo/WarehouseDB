@@ -19,6 +19,7 @@ $(document).ready(function() {
             { data: "description" },
             { data: "container" },
             { data: "qty", className: "rowDataSd" },
+            { data: "elocid" },
             { data: "datercvd" }
         ],
         ajax: {

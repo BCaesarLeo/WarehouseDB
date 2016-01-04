@@ -21,7 +21,7 @@
 <!--- *********************** THIS PAGE's specific javascript such as (datatables, flot, etc..) ***********************--->
 <cfsavecontent variable="extraJS">
 	<script src="https://cdn.datatables.net/s/bs/dt-1.10.10/datatables.min.js" type="text/javascript" ></script>
-	<script src="/js/_core/inventory/inventorySearchDataTable.js" type="text/javascript"></script>
+	<script src="/js/_core/inventory/orderSearchDataTable.js" type="text/javascript"></script>
 </cfsavecontent>
 
 <!--- *********************** _coreJavaScript ***********************--->

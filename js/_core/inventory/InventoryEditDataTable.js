@@ -102,7 +102,7 @@ $(document).ready(function() {
                     { data: "container" },
                     { data: "qty", className: "rowDataSd" },
                     { data: "datercvd" },
-                    { data: "locid" },
+                    { data: "elocid" },
                     { data: "meditdate" }
                 ];
 
@@ -135,7 +135,7 @@ $(document).ready(function() {
                     "aaSorting": [[ 6, "desc" ]],
                     "columns" : arColumns,
                     "ajax" : {
-                        url: '/cfc/inventory/inventoryService.cfc?method=getAll&mode=edit&returnAs=datatables&returnFormat=JSON', 
+                        url: '/cfc/inventory/inventoryService.cfc?method=getAllw0&mode=edit&returnAs=datatables&returnFormat=JSON', 
                         dataSrc: 'aaData'
                     },
                     "initComplete": function(settings, json) {

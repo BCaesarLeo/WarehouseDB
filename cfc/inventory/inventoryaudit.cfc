@@ -26,7 +26,7 @@
   <cfargument name="returnAs" default="query">
   <!--- Scope variables  --->
 <cfset var qInboundDistinct = "">
-<cfquery name="qInboundDistinct">
+<cfquery name="qInboundDistinct" maxrows="20">
        SELECT  containerno, CONTAINERREGDATE
        FROM Inbound_D8TA
        group by containerno, CONTAINERREGDATE
@@ -61,7 +61,7 @@
  <!--- Scope variables  --->
 <cfset var qAuditDistinct= "">
 <!--- Only show 3 results as It's just html --->
-<cfquery name="qAuditDistinct" maxrows="3">
+<cfquery name="qAuditDistinct" maxrows="20">
        SELECT  Distinct DateRcvd, containerno
        FROM Scanned_D8TA_Qry
    ORDER BY DateRcvd DESC
@@ -141,11 +141,28 @@
 
 
 <cfreturn qInboundDataContainer>
-
-
-
-
-
 </cffunction>
+
+<!--- Get Contents of the Container by URL Passed Var --->
+
+<cffunction name="urlContainer" access="remote" returntype="any" hint="Gets Container Contents">
+
+<cfif structkeyExists(url,'container_no')>
+<cfscript>
+qryGetContainerResults = new Query(
+        sql = "
+        SELECT *
+        FROM Inbound_D8TA
+        WHERE ContainerNo=:eContainerNo
+        ");    
+        qryGetContainerResults.addParam(name="eContainerNo",value=container_no, cfsqltype="cf_sql_varchar");
+        ecoContainerInfo = qryGetContainerResults.execute().getResult();
+       
+</cfscript>
+<cfreturn ecoContainerInfo>
+</cfif>
+</cffunction>
+
+  
 
 </cfcomponent>

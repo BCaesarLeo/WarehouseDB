@@ -29,6 +29,7 @@
 							<th>Description</th>
 							<th>Container</th>
 							<th class="hidden-phone">Quantity</th>
+							<th>Location</th>
 							<th class="hidden-phone">Date Received</th>
 			            </tr>
 	            	</thead>
@@ -38,6 +39,7 @@
 						    <th>Description</th>
 						    <th>Container</th>
 						     <th colspan="" style="text-align:right">Qty:</th>
+						      <th>Location</th>
 						    <th colspan="" ></th>
 			            </tr>
 		            </tfoot>

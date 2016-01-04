@@ -1,7 +1,8 @@
+<form action="/cfc/inventory/orderupload.cfc?method=saveOrder" method="post"> 
 
-
-    
+        
     <!--main content start-->
+ 
     <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
@@ -19,7 +20,7 @@
 
             <!-- Order Wizard-->
    <!--- I cannot get javascript to pass from these tabs to the mock invoice on this page so I'll worry about it later --->
-        <<!--- div class="row">
+        <!--- div class="row">
             <div class="col-sm-12">
                
                 <section class="panel">
@@ -103,17 +104,27 @@
                         <div class="row invoice-to">
                             <div class="col-md-4 col-sm-4 pull-left">
                                 <h4>Order Information:</h4>
-                                Order No<input type="text"  id="fOrder" class="form-control" placeholder="OrderNo"> 
-Customer Name<input type="text"  id="fName" class="form-control" placeholder="Name"> 
-Address Line 1: <input type="text" id="fAddress1" class="form-control" placeholder="Street Address">
-Address Line 2: <input type="text" id="fAddress2" class="form-control" placeholder="">
-    City:           <input type="text" id="fCity" class="form-control" placeholder="Input Zip First for Auto Calculation">
-    State:          <input type="text" id="fState" class="form-control" placeholder="">
-    Zip:            <input type="text" id="fZip" class="form-control" placeholder="">
-    Phone:          <input type="text" id="fPhone" class="form-control" placeholder="">
-    Email           <input type="email" id="fEmail" class="form-control" placeholder="">
+                                Order No<input type="text"  name="OrderNo" id="fOrder" maxlength="20" class="form-control" placeholder="OrderNo" required="yes"> 
+Customer Name<input type="text"  id="fName" name="name" class="form-control" maxlength="120" placeholder="Name" required="yes"> 
+Address Line 1: <input type="text" id="fAddress1" name="Address1" class="form-control" maxlength="120" placeholder="Street Address" required="yes">
+Address Line 2: <input type="text" id="fAddress2" name="Address2" class="form-control" maxlength="120" placeholder="">
+    City:           <input type="text" id="fCity" name="City" class="form-control" maxlength="50" placeholder="* Auto Populated when Zip Code is Typed" required="yes"> 
+    State:          <input type="text" id="fState" name="State" class="form-control" maxlength="30" placeholder="* Auto Populated when Zip Code is Typed" required="yes">
+    Zip:            <input type="text" id="fZip" name="OZip" class="form-control" placeholder="" maxlength="12" required="yes">
+    Phone:          <input type="text" id="fPhone" name="phone" class="form-control" placeholder=""maxlength="12">
+    Email           <input type="email" id="fEmail" name="email" class="form-control" placeholder="" maxlength="62">
+    Shipping Method: <select name="ShipMethod"class="form-control m-bot15" required="yes">
+                                 <option></option>
+                                <option>FedEx Ground</option>
+                                <option>FedEx 2nd Day</option>
+                                <option>FedEx Overnight</option>
+                            </select>
                                 </p>
                             </div>
+
+
+
+
                             <div class="col-md-4 col-sm-5 pull-right">
                                 <div class="row">
                                     <div class="col-md-4 col-sm-5 inv-label">Order No  <!--- barcode div --->
@@ -123,86 +134,82 @@ Address Line 2: <input type="text" id="fAddress2" class="form-control" placehold
                                 <br>
                                 <div class="row">
                                     <div class="col-md-4 col-sm-5 inv-label">Date #</div>
-                                    <div class="col-md-8 col-sm-7">21 December 2013</div>
+                                    <div class="col-md-8 col-sm-7"> <h3 class="amnt-value"><cfoutput>#DateFormat(Now()," mmmm , dd yyyy")#</cfoutput></h3></div>
                                 </div>
                                 <br>
                                 <div class="row">
-                                    <div class="col-md-12 inv-label">
+                                <!--- Might Be able to use later hint AMAZON API --->
+
+                                    <!--- <div class="col-md-12 inv-label">
                                         <h3>TOTAL DUE</h3>
                                     </div>
                                     <div class="col-md-12">
                                         <h1 class="amnt-value">$ 3120.00</h1>
-                                    </div>
+                                    </div> --->
                                 </div>
 
 
                             </div>
                         </div>
-                        <table class="table table-invoice" >
+                        <table class="table table-invoice" id="customFields" >
                             <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Item Description</th>
-                                <th class="text-center">Unit Cost</th>
+                                <th class="text-center">SKU</th>
                                 <th class="text-center">Quantity</th>
-                                <th class="text-center">Total</th>
+                                <th class="text-center"></th>
                             </tr>
                             </thead>
                             <tbody>
+                        
                             <tr>
-                                <td>1</td>
+                                <!--- startcutforinput --->
+                                <td><script>'+rownum+'</script></td>
                                 <td>
-                                    <h4>Service One</h4>
-                                    <p>Service Four Description Lorem ipsum dolor sit amet.</p>
+                                  
+                                    <p><input class="form-control input-lg m-bot15" id= "qDescription"  name="BriefDesc"  type="text"  value="Item Description"></p>
                                 </td>
-                                <td class="text-center">1</td>
-                                <td class="text-center">4</td>
-                                <td class="text-center">$1300.00</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>
-                                    <h4>Service Two</h4>
-                                    <p>Service Four Description Lorem ipsum dolor sit amet.</p>
-                                </td>
-                                <td class="text-center">2</td>
-                                <td class="text-center">5</td>
-                                <td class="text-center">$1300.00</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>
-                                    <h4>Service Three</h4>
-                                    <p>Service Four Description Lorem ipsum dolor sit amet.</p>
-                                </td>
-                                <td class="text-center">1</td>
-                                <td class="text-center">9</td>
-                                <td class="text-center">$1300.00</td>
+                                <td class="text-center"><input id= "qSKU" name="SKU" autocomplete="off" class="form-control input-lg m-bot11" type="text"  required="yes"></td>
+                                <td class="something"><input name="Qty" type="text" class="form-control input-lg m-bot15" required="yes"></td>
+                                <td class="text-center"></td>
+                                <!--- add on row button --->
+           <td class="text-center"> <a href="javascript:void(0);" class="addCF">Add</a>
+        </td>
                             </tr>
 
                             </tbody>
                         </table>
                         <div class="row">
                             <div class="col-md-8 col-xs-7 payment-method">
-                                <h4>Payment Method</h4>
-                                <p>1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                <p>2. Pellentesque tincidunt pulvinar magna quis rhoncus.</p>
-                                <p>3. Cras rhoncus risus vitae congue commodo.</p>
+                                <h4>Special Instructions</h4>
+                                <p>1. Use this section to put in special comments for Fourway</p>
+                                <p>2. This field will not appear on any documents for the customer</p>
+                                <p>3. Internal Use Only</p>
                                 <br>
-                                <h3 class="inv-label itatic">Thank you for your business</h3>
+                               
                             </div>
+
+<div class="col-md-8 col-xs-7 payment-method">
+  <textarea name="comments" class="form-control" rows="6"></textarea>
+   <h3 class="inv-label itatic">Thank you for your business</h3>
+    </div>
+
                             <div class="col-md-4 col-xs-5 invoice-block pull-right">
                                 <ul class="unstyled amounts">
-                                    <li>Sub - Total amount : $3820</li>
-                                    <li>Discount : 10% </li>
-                                    <li>TAX (15%) ----- </li>
-                                    <li class="grand-total">Grand Total : $7145</li>
+                                    <li>Sub - Total amount : --</li>
+                                    <li>Discount : % </li>
+                                    <li>TAX (%) ----- </li>
+                                    <li class="grand-total">Grand Total : - </li>
                                 </ul>
                             </div>
                         </div>
 
                         <div class="text-center invoice-btn">
-                            <a class="btn btn-success btn-lg"><i class="fa fa-check"></i> Submit Order </a>
+                            <!--- unsure why we have a hidden method attribute but here it seems to be required --->
+                             <input type="Hidden" name="method" value="saveOrder"> 
+                            <input type="submit" value="Submit Order" class="btn btn-success btn-lg"></input><!--- <i class="fa fa-check"></i> --->
+                            </form>
                             <a href="invoice_print.html" target="_blank" class="btn btn-primary btn-lg"><i class="fa fa-print"></i> Print </a>
                         </div>
 

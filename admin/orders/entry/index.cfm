@@ -29,8 +29,10 @@
 
 <!--- *********************** THIS PAGE's specific javascript such as (datatables, flot, etc..) ***********************--->
 <cfsavecontent variable="extraJS">
-	<!--Barcode Generator--->
+	<!--Barcode Generator JS--->
 <script type="text/javascript" src="/js/jquery-barcode.js"></script>
+<!--- Lodash  --->
+<script type="text/javascript" src="/js/lodash.js"></script>
 	<script>
 		$(document).ready(function(){
 			//case sensitive.. by logging i could tell this function wasn't getting called.
@@ -67,7 +69,7 @@
 				
 
 		
-// zipcode finder 
+// Zipcode finder 
 $('##fZip').keyup(function(e){
 	var zipCode = $(this).val();
 
@@ -82,7 +84,7 @@ $('##fZip').keyup(function(e){
 	}
 });
 
-// barcode generator
+// Barcode generator
 $('##fOrder').keyup(function(e){
 	var bCodeNo = $(this).val();
 
@@ -92,14 +94,65 @@ $('##displayfOrder').text(el.val());
 });
 
 
-//Add on to Table
+//Add Custom Row to Table
+
+// Call when AddButton Clicked
 	$(".addCF").click(function(){
-		$("##customFields").append('<tr valign="top"><td>3</td><td><h4>Service Two</h4><p>Service Four Description Lorem ipsum dolor sit amet.</p></td><td class="text-center">2</td><td class="text-center">5</td><td class="text-center">$1300.00</td><td> &nbsp;  &nbsp; <a href="javascript:void(0);" class="remCF">Remove</a></td></tr>');
+		// add lodash autoincrementing value
+		var rownum = _.uniqueId();
+		// →  This would be add incrementing rownum to SKU <input id= "qSKU" name="SKU'+rownum+'"
+	
+// Append Custom Row HTML 
+		$("##customFields").append('<tr valign="top"><td>'+rownum+'</td><td><input class="form-control input-lg m-bot10" id= "qDescription'+rownum+'"  name="BriefDesc"  type="text"  value="Item Description"></td><td><input id= "qSKU'+rownum+'" name="SKU" class="form-control input-lg m-bot11" type="text"  required="yes" autocomplete="off"></td><td id="1"class="something"><input name="Qty" type="text" class="form-control input-lg m-bot10" required="yes"></td><td class="text-center"></td><td> &nbsp;  &nbsp; <a href="javascript:void(0);" class="remCF">Remove</a></td></tr>');
+
+// Autocomplete Function called again to run after input
+		$('.form-control.input-lg.m-bot11').on('focusin' , function(e) {
+	console.log("focus working");
+	//outputting the active selection
+	var x=document.activeElement;
+	console.log(x);
+    $(this).autocomplete({
+      source: function(query, response) {
+                 $.ajax({
+                       url: '/cfc/inventory/inventoryService.cfc?method=getInnbound&returnFormat=JSON',
+                     dataType: "json",
+                     data: {
+                         searchPhrase: query.term
+                     },
+                     success: function(getInquArray) {
+                         response(getInquArray);
+                         console.log(getInquArray);
+                   }
+                });
+            },
+             // minLength: 2, //Sets a minimum length of input
+             //Attempting to set field values and 
+        select: function(event, ui) {
+            $(x).val(ui.item.label);
+            $("##qSKU").val(ui.item.label);
+        // $('.form-control.input-lg.m-bot11').next(".form-control.input-lg.m-bot11").val(ui.item.label);
+            // $(x.Event.target).previous().html("FOO")`
+
+
+
+console.log(event);
+console.log(ui);
+console.log(this);
+            //this should take care of what needs to happen when you actually click 
+        }
+    });
 	});
+// Remove Custom Row HTML 
     $("##customFields").on('click','.remCF',function(){
         $(this).parent().parent().remove();
+
+
+
+
+    });
     });
 	</script>
+
 
 <!--- Page Entries --->
 
@@ -111,13 +164,12 @@ $('##displayfOrder').text(el.val());
 <script src="/js/jquery.scrollTo.min.js"></script>>
 <script src="/js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
 <script src="/js/jquery.nicescroll.js"></script>
-
 <script src="/js/jquery-steps/jquery.steps.js"></script>
 
 
 <script>
     $(function ()
-    {//log this
+    {
 			console.log($('##wizard'));
         $("##wizard").steps({
             headerTag: "h2",
@@ -132,12 +184,41 @@ $('##displayfOrder').text(el.val());
             stepsOrientation: "vertical"
         });
     });
-
-
 </script>
 
 
+
+
+ <!--- Autocomplete Function called  --->
+<script>
+$('.form-control.input-lg.m-bot11').on('focusin' , function() {
+	console.log("focus working");
+    $(this).autocomplete({
+      source: function(query, response) {
+                 $.ajax({
+                       url: '/cfc/inventory/inventoryService.cfc?method=getInnbound&returnFormat=JSON',
+                     dataType: "json",
+                     data: {
+                         searchPhrase: query.term
+                     },
+                     success: function(getInquArray) {
+                         response(getInquArray);
+                         console.log(getInquArray);
+                   }
+                });
+            }
+        });
+    });
+</script>
+<!--- on Focus --->
+<script type="text/javascript">
+  $(".form-control.input-lg.m-bot12").focus(function(){
+        
+    });
+</script>
+
 </cfsavecontent>
+<!--- <cfinclude template="/includes/_debug.cfm"> --->
 <!--- *********************** _footer ***********************--->
 <cfinclude template="/includes/chunks/_footer.cfm">
 
