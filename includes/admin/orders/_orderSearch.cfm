@@ -17,7 +17,7 @@
 			</div>
 		</div>
 		
-		<!--- INVENTORY TABLE--->
+		<!--- ORDER TABLE--->
 		<div class="row">
 	    <div class="col-sm-12">
 	      <section class="panel">
@@ -27,7 +27,7 @@
 	        </header>
 	        <div class="panel-body">
 	          <div class="adv-table">
-	            <table  class="display table table-bordered table-hover table-striped " id="dynamic-table">
+	            <table  class="display table table-bordered table-hover table-striped " id="order-table">
 	            	<thead>
 			            <tr>
 			            	<th>Order Date</th>
@@ -62,6 +62,51 @@
 	      </section>
 	    </div>
 	</div>
+
+
+
+	<!--- ORDER Items TABLE--->
+		<div class="row">
+	    <div class="col-sm-12">
+	      <section class="panel">
+	      	
+	        <header class="panel-heading">
+	            Order Items Search <div class="pull-right"><strong></strong> (<span id="inventoryTotal1" class="alert-success"></span> )</div>
+	        </header>
+	        <div class="panel-body">
+	          <div class="adv-table">
+	            <table  class="display table table-bordered table-hover table-striped " id="order-items-table">
+	            	<thead>
+			            <tr>
+			         
+			                <th>Order No.</th>
+			                <th>Sku</th>
+							<th>Description</th>
+							<th>Qty</th>
+							<th class="hidden-phone">Status</th>
+							<th class="hidden-phone">Ship Date</th>
+			            </tr>
+	            	</thead>
+		            <tfoot>
+			          <tr>
+			         
+			                <th>Order No.</th>
+			                <th>Sku</th>
+							<th>Description</th>
+							<th>Qty</th>
+							<th class="hidden-phone">Status</th>
+							<th class="hidden-phone">Ship Date</th>
+			            </tr>
+		            </tfoot>
+	            </table>
+	          </div>
+	        </div>
+	      </section>
+	    </div>
+	</div>
+
+
+
 	</section>
 </section>
 <!--- *********************** _DebugScript ***********************--->

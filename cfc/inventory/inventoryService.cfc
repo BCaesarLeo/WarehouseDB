@@ -114,7 +114,7 @@ WHERE qty <> 0
       //abort;
     </cfscript>
     <!--- NOW JUST DO YOUR LOGIC HERE... however it doesn't send over the OLD value... but we can look at stashing the old qty... --->
-<cftry>
+
   
 
     <cfquery  name="insertData"> <!--- Doesn't Require a name as I'm only inserting not returning --->
@@ -128,10 +128,9 @@ WHERE qty <> 0
          <cfqueryparam value = "#arguments.Qty#" cfsqltype="CF_SQL_SMALLINT"/>,
          <cfqueryparam value = "#arguments.eLocID#" cfsqltype="CF_SQL_VARCHAR"/>
                      )  </cfquery> 
-<cfcatch>
+
   <cflocation url="/admin/error.cfm" >
-</cfcatch>
-</cftry>
+
 
     <cfscript>
       return true;

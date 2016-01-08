@@ -69,7 +69,7 @@ return arguments;
 						<cfqueryparam value = "#arguments.OZip#" cfsqltype="CF_SQL_VARCHAR"/>,
 						<cfqueryparam value = "#arguments.email#" cfsqltype="CF_SQL_VARCHAR"/>,
 						<cfqueryparam value = "#arguments.phone#" cfsqltype="CF_SQL_VARCHAR"/>,
-						<cfqueryparam value = "PENDING" cfsqltype="CF_SQL_VARCHAR"/>,
+						<cfqueryparam value = "PICK" cfsqltype="CF_SQL_VARCHAR"/>,
 						<cfqueryparam value = "#arguments.Comments#" cfsqltype="CF_SQL_VARCHAR"/>,
 						<cfqueryparam value = "#arguments.ShipMethod#" cfsqltype="CF_SQL_VARCHAR"/>
                      )  

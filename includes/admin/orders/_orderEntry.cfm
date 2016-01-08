@@ -123,8 +123,6 @@ Address Line 2: <input type="text" id="fAddress2" name="Address2" class="form-co
                             </div>
 
 
-
-
                             <div class="col-md-4 col-sm-5 pull-right">
                                 <div class="row">
                                     <div class="col-md-4 col-sm-5 inv-label">Order No  <!--- barcode div --->
@@ -151,35 +149,38 @@ Address Line 2: <input type="text" id="fAddress2" name="Address2" class="form-co
 
                             </div>
                         </div>
-                        <table class="table table-invoice" id="customFields" >
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Item Description</th>
-                                <th class="text-center">SKU</th>
-                                <th class="text-center">Quantity</th>
-                                <th class="text-center"></th>
-                            </tr>
-                            </thead>
-                            <tbody>
                         
-                            <tr>
-                                <!--- startcutforinput --->
-                                <td><script>'+rownum+'</script></td>
-                                <td>
-                                  
-                                    <p><input class="form-control input-lg m-bot15" id= "qDescription"  name="BriefDesc"  type="text"  value="Item Description"></p>
+                        <table class="table table-invoice general-table" id="customFields">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th class="text-center" width="150">SKU</th>
+                                    <th>Item Description</th>
+                                    <th class="text-center" width="20">Quantity</th>
+                                    <th class="text-center">&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <td colspan="100%">
+                                    <a href="javascript:void(0);" class="addCF btn btn-primary btn-sm">Add Item To Order</a>
                                 </td>
-                                <td class="text-center"><input id= "qSKU" name="SKU" autocomplete="off" class="form-control input-lg m-bot11" type="text"  required="yes"></td>
-                                <td class="something"><input name="Qty" type="text" class="form-control input-lg m-bot15" required="yes"></td>
-                                <td class="text-center"></td>
-                                <!--- add on row button --->
-           <td class="text-center"> <a href="javascript:void(0);" class="addCF">Add</a>
-        </td>
-                            </tr>
+                            </tfoot>
+                            <tbody>
+                                <tr class="orderRow">
+                                    <td>1</td>
+                                    <td class="text-center"><input name="SKU" autocomplete="off" class="form-control input-lg m-bot11 skuAutoComplete" type="text"  required="yes"></td>
+                                    <td>
+                                        <input class="form-control input-lg m-bot15" name="BriefDesc"  type="text"  value="Item Description">
+                                    </td>
+                                    
+                                    <td class="something"><input name="Qty" type="text" class="form-control input-lg m-bot15" required="yes"></td>
+                                    <!--- add on row button --->
+                                    <td> <a href="javascript:void(0);" class="remCF btn btn-danger btn-sm">Remove</a></td>
+                                </tr>
 
                             </tbody>
                         </table>
+                        
                         <div class="row">
                             <div class="col-md-8 col-xs-7 payment-method">
                                 <h4>Special Instructions</h4>
@@ -190,10 +191,10 @@ Address Line 2: <input type="text" id="fAddress2" name="Address2" class="form-co
                                
                             </div>
 
-<div class="col-md-8 col-xs-7 payment-method">
-  <textarea name="comments" class="form-control" rows="6"></textarea>
-   <h3 class="inv-label itatic">Thank you for your business</h3>
-    </div>
+                            <div class="col-md-8 col-xs-7 payment-method">
+                                <textarea name="comments" class="form-control" rows="6"></textarea>
+                                <h3 class="inv-label itatic">Thank you for your business</h3>
+                            </div>
 
                             <div class="col-md-4 col-xs-5 invoice-block pull-right">
                                 <ul class="unstyled amounts">

@@ -63,7 +63,7 @@ $(document).ready(function() {
 
                     oTable.fnUpdate('<a class="edit" href="">Edit</a>', nRow, 0, false);
                     //make a delete button if they are admin or nothing if they aren't. might not be perfect but should work unless they are hackers..
-                    var deleteBtn = (isAdmin) ? '<a class="delete" href="#">Delete</a>' : ''; //short hand way to write an if.. else 
+                    var deleteBtn = (isAdmin) ? '<a class="delete" href="#"></a>' : ''; //short hand way to write an if.. else  Nico orignally had delete button popup '<a class="delete" href="#">Delete</a>'
                     oTable.fnUpdate(deleteBtn, nRow, 1, false);
 
                     //oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
