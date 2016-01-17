@@ -104,20 +104,27 @@
                         <div class="row invoice-to">
                             <div class="col-md-4 col-sm-4 pull-left">
                                 <h4>Order Information:</h4>
-                                Order No<input type="text"  name="OrderNo" id="fOrder" maxlength="20" class="form-control" placeholder="OrderNo" required="yes"> 
-Customer Name<input type="text"  id="fName" name="name" class="form-control" maxlength="120" placeholder="Name" required="yes"> 
-Address Line 1: <input type="text" id="fAddress1" name="Address1" class="form-control" maxlength="120" placeholder="Street Address" required="yes">
-Address Line 2: <input type="text" id="fAddress2" name="Address2" class="form-control" maxlength="120" placeholder="">
-    City:           <input type="text" id="fCity" name="City" class="form-control" maxlength="50" placeholder="* Auto Populated when Zip Code is Typed" required="yes"> 
-    State:          <input type="text" id="fState" name="State" class="form-control" maxlength="30" placeholder="* Auto Populated when Zip Code is Typed" required="yes">
-    Zip:            <input type="text" id="fZip" name="OZip" class="form-control" placeholder="" maxlength="12" required="yes">
-    Phone:          <input type="text" id="fPhone" name="phone" class="form-control" placeholder=""maxlength="12">
-    Email           <input type="email" id="fEmail" name="email" class="form-control" placeholder="" maxlength="62">
+                                Vendor<input type="text"  name="Vendor" id="Vendor" maxlength="20" class="form-control" required="yes" placeholder="Vendor" autocomplete="off"> 
+                                Order No<input type="text"  name="OrderNo" id="fOrder" maxlength="20" class="form-control" placeholder="OrderNo" required="yes" autocomplete="off"autocomplete="off"> 
+Customer Name<input type="text"  id="fName" name="name" class="form-control" maxlength="120" placeholder="Name" required="yes"autocomplete="off"autocomplete="off"> 
+Address Line 1: <input type="text" id="fAddress1" name="Address1" class="form-control" maxlength="120" placeholder="Street Address" required="yes"autocomplete="off"autocomplete="off">
+Address Line 2: <input type="text" id="fAddress2" name="Address2" class="form-control" maxlength="120" placeholder=""autocomplete="off"autocomplete="off">
+    City:           <input type="text" id="fCity" name="City" class="form-control" maxlength="50" placeholder="* Auto Populated when Zip Code is Typed" required="yes"autocomplete="off"autocomplete="off"> 
+    State:          <input type="text" id="fState" name="State" class="form-control" maxlength="30" placeholder="* Auto Populated when Zip Code is Typed" required="yes"autocomplete="off"autocomplete="off">
+    Zip:            <input type="text" id="fZip" name="OZip" class="form-control" placeholder="" maxlength="12" required="yes"autocomplete="off"autocomplete="off">
+    Phone:          <input type="text" id="fPhone" name="phone" class="form-control" placeholder=""maxlength="12"autocomplete="off"autocomplete="off">
+    Email           <input type="email" id="fEmail" name="email" class="form-control" placeholder="" maxlength="62"autocomplete="off"autocomplete="off">
     Shipping Method: <select name="ShipMethod"class="form-control m-bot15" required="yes">
                                  <option></option>
                                 <option>FedEx Ground</option>
                                 <option>FedEx 2nd Day</option>
                                 <option>FedEx Overnight</option>
+                                 <option>FedEx Saver</option>
+                                 <option>UPS Ground</option>
+                                  <option>UPS 2nd Day</option>
+                                   <option>UPS Overnight</option>
+                                   <option>UPS Saver</option>
+                                 <option>LTL</option>
                             </select>
                                 </p>
                             </div>
@@ -157,7 +164,7 @@ Address Line 2: <input type="text" id="fAddress2" name="Address2" class="form-co
                                     <th class="text-center" width="150">SKU</th>
                                     <th>Item Description</th>
                                     <th class="text-center" width="20">Quantity</th>
-                                    <th class="text-center">&nbsp;</th>
+                                    <th class="text-center" width="90">Bundle</th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -168,12 +175,13 @@ Address Line 2: <input type="text" id="fAddress2" name="Address2" class="form-co
                             <tbody>
                                 <tr class="orderRow">
                                     <td>1</td>
-                                    <td class="text-center"><input name="SKU" autocomplete="off" class="form-control input-lg m-bot11 skuAutoComplete" type="text"  required="yes"></td>
+                                    <td class="text-center"><input name="SKU" autocomplete="off" class="form-control input-lg m-bot11 skuAutoComplete" type="text"  required="yes"autocomplete="off"></td>
                                     <td>
                                         <input class="form-control input-lg m-bot15" name="BriefDesc"  type="text"  value="Item Description">
                                     </td>
+                                    <td class="something"><input name="Qty" type="text" class="form-control input-lg m-bot15" required="yes"autocomplete="off"></td>
+                                        <td class="text-center"><input name="Bundle" type="text" class="form-control input-lg m-bot15" required="no" default="b1"></td>
                                     
-                                    <td class="something"><input name="Qty" type="text" class="form-control input-lg m-bot15" required="yes"></td>
                                     <!--- add on row button --->
                                     <td> <a href="javascript:void(0);" class="remCF btn btn-danger btn-sm">Remove</a></td>
                                 </tr>

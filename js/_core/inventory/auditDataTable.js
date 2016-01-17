@@ -16,10 +16,10 @@ $(document).ready(function() {
     var x = $('#audit-table').dataTable( {
         "aaSorting": [[ 4, "desc" ]],
         "columns" : [
-            { data: "scanned_sku" },
-            { data: "maxdescription" },
+            { data: "sku" },
+            { data: "description" },
             { data: "containerno" },
-            { data: "qtyaudit", className: "rowDataSd" },
+            { data: "auditqty", className: "rowDataSd" },
             { data: "datercvd" }
         ],
         ajax: {

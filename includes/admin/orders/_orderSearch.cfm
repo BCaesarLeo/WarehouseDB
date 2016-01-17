@@ -32,6 +32,7 @@
 			            <tr>
 			            	<th>Order Date</th>
 			                <th>Order No.</th>
+			                <th>Vendor</th>
 			                <th>Status</th>
 							<th>Name</th>
 							<th>Address</th>
@@ -46,6 +47,7 @@
 			            <tr>
 			                <th>Order Date</th>
 			                <th>Order No.</th>
+			                <th>Vendor</th>
 			                <th>Status</th>
 							<th>Name</th>
 							<th>Address</th>
@@ -83,6 +85,7 @@
 			                <th>Sku</th>
 							<th>Description</th>
 							<th>Qty</th>
+							<th>Bundle</th>
 							<th class="hidden-phone">Status</th>
 							<th class="hidden-phone">Ship Date</th>
 			            </tr>
@@ -94,6 +97,7 @@
 			                <th>Sku</th>
 							<th>Description</th>
 							<th>Qty</th>
+							<th>Bundle</th>
 							<th class="hidden-phone">Status</th>
 							<th class="hidden-phone">Ship Date</th>
 			            </tr>

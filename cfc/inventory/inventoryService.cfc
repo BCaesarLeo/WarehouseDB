@@ -38,7 +38,7 @@ FROM
       FROM HOUSE_D8TA_Q
       <!--- WHERE  SKU LIKE 4151  ---> 
       <!--- WHERE (Sum(Quantity) = 0)--->
-      group by CONTAINERNO, SKU, DESCRIPTION, dateRcvd, eLocID
+      group by CONTAINERNO, SKU, DESCRIPTION,  eLocID
 )
 as Innertable
 WHERE qty <> 0
@@ -88,7 +88,7 @@ WHERE qty <> 0
       FROM HOUSE_D8TA_Q
       <!--- WHERE  SKU LIKE 4151  ---> 
       <!--- WHERE (Sum(Quantity) = 0)--->
-      group by CONTAINERNO, SKU, DESCRIPTION, dateRcvd, eLocID
+      group by CONTAINERNO, SKU, DESCRIPTION, eLocID
    </cfquery>
 
 
@@ -151,10 +151,11 @@ WHERE qty <> 0
     <cffile action="Upload"
     filefield="ecoDataFile"
     destination="#strInExcel#"
-    nameconflict="Error" > 
+    nameconflict="Overwrite" > 
 
     <!--- Error Page that outputs cfcache message --->
   <cfcatch>
+ 
 <cfinclude template="/includes/_error.cfm">
 
 <cfabort>

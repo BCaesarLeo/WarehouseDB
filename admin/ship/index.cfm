@@ -1,4 +1,9 @@
+
+
+
+
 <cfoutput>
+	
 <!--- *********************** _header ***********************--->
 <cfinclude template="/includes/chunks/_header.cfm">
 
@@ -9,12 +14,25 @@
 
 
 <!--- *********************** THIS PAGE'S INCLUDE FILE --- this is where your main logic goes for this page ***********************--->
-<cfinclude template="/includes/admin/dashboard/_mainDashboard.cfm">
+<cfset fedexa =APPLICATION.fedexship.shipping(Company:'Fake Company', 
+ Name:'John Doe',
+ Address1:'123 Bishop Road',
+ City:'Honolulu',
+ State:'HI',
+ ZIP:'96819',
+ Phone : '123456789000',
+ Weight:'1',
+ Length:'14',
+ Width:'12',
+ Height:'1',
+ PackagingType: 'FEDEX_ENVELOPE',
+ ShippingMethod: 'PRIORITY_OVERNIGHT',
+ orderid: 'Test-1')>
 
 <!--- *********************** THIS PAGE's specific javascript such as (datatables, flot, etc..) ***********************--->
 
 
-
+<cfdump var= "fedexa">
 <!--- *********************** _coreJavaScript ***********************--->
 <cfinclude template="/includes/chunks/_coreJavaScript.cfm">
 <script src="/js/jquery.js"></script>
@@ -56,6 +74,6 @@
 
 <!--- *********************** _footer ***********************--->
 <cfinclude template="/includes/chunks/_footer.cfm">
-<!--- <cfinclude template="/includes/_debug.cfm"> --->
+
 </cfoutput>
 	

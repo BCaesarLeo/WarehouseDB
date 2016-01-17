@@ -1,11 +1,7 @@
+ <cfinvoke component="cfc.inventory.orders" method="getOrderInfo" returnvariable="exupl">
+ <cfinvoke component="cfc.inventory.orders" method="getOrderInfo" returnvariable="exupl">
 <cfoutput>
-<!--- *********************** _header ***********************--->
-<cfinclude template="/includes/chunks/_header.cfm">
 
-
-<!--- *********************** _mainMenu ***********************--->
-<cfset activeNav = 'inventory'> <!-- set the activeNav variable here before the include so the menu will have the proper thing selected -->
-<cfinclude template="/includes/chunks/_mainMenu.cfm">
 
 <!--- *********************** _coreJavaScript ***********************--->
 <cfinclude template="/includes/chunks/_coreJavaScript.cfm">
@@ -45,28 +41,57 @@ $( document ).ready(function() {
 <!--- *********************** THIS PAGE'S INCLUDE FILE --- this is where your main logic goes for this page ***********************--->
 <section>
     <div id="theOrder">
+        
     <!--- value and TYPE are placed on the div itself and so basically on every page load anything with the class of barcodeDsp will have the value and type parsed and a barcode will be created.. --->
-    <h4>ORDER</h4>
-    <div class="barcodeDsp" data-barcodeval="xx123245" data-barcodetype="order"></div>
+    <section>
+       
+    <h2>Pick Sheet</h2>
+    <div  style="float:left;">
 
-    <h4>SKU</h4>
-    <div class="barcodeDsp" data-barcodeval="xx123123212" data-barcodetype="sku"></div>
+        #exupl.Name# <br>
+        #exupl.Address1#<br>
+        #exupl.Address2#<br>
+        #exupl.city# , #exupl.state# #exupl.OZip#<br>
+#exupl.email#  #exupl.phone# 
+<br>
+ #exupl.comments#<br>
+ #exupl.shipmethod#
 
-    <h4>LOCATION</h4>
-    <div class="barcodeDsp" data-barcodeval="xx12321321" data-barcodetype="location"></div>
-</div>
+    </div>
+        <div style="float:left;">
+    <h4>Order #exupl.OrderNo#</h4>
+ <div class="barcodeDsp" data-barcodeval="#exupl.OrderNo#" data-barcodetype="order"></div>
+    </div>
 
+    </section>
+   
+    <div style="clear:both">
+      <hr>
+    <cfloop query="exupl">
+       <div style="float:left;"> 
+     <h4>Quantity #exupl.Qty# - #exupl.SKU# - #exupl.Description#</h4>
+    <div class="barcodeDsp" data-barcodeval="#exupl.SKU#" data-barcodetype="sku"></div>
+    </div>
+    
+    <div style="padding:0px 0px 0px 20px;">
+      <h4> FIFO LOCATION #exupl.eLocID#</h4>
+       <div class="barcodeDsp" data-barcodeval="#exupl.eLocID#" data-barcodetype="location"></div>
+       <hr>
+</cfloop>
+
+    
+    </div>
 
     </section>
 <section>
-	<div>
-<form id="downloadOrderForm" name="downloadOrderForm" action="downloadOrder.cfm" method="post" target="_blank" style="display:none;">
+    <div>
+<form id="downloadOrderForm" name="downloadOrderForm" action="_downloadPrint.cfm" method="post" target="_blank" style="display:none;">
     <input name="orderID" type="hidden" value="12345" />
     <input id="content" name="content" type="hidden" value="" />
 
 </form>
-	</div>
-	</section>
+    </div>
+    </section>
 
 <!--- *********************** THIS PAGE's specific javascript such as (datatables, flot, etc..) ***********************--->
 

@@ -24,6 +24,11 @@ Description :
         // DATASOURCE
        
 		this.datasource={name='db11', username="bc992164", password="Bc992164!"};
+
+		//MAIL SERVER
+
+
+
     </cfscript>
 
 	<!--- on Application Start --->
@@ -41,6 +46,26 @@ Description :
             //INVENTORY OBJECTS
 			APPLICATION.inventoryService = new cfc.inventory.inventoryService();
 			APPLICATION.inventoryAuditObj = new cfc.inventory.inventoryAudit();
+
+			//API Objects
+			APPLICATION.fedexship = new cfc.inventory.fedex();
+
+			//FEDEX OBJECTS
+            APPLICATION.FedExKey = "mSoBq9VwVNdlHqKW";
+			APPLICATION.FedExpassword = "Bc993190!";	
+			APPLICATION.FedExaccount = "510087666";
+			APPLICATION.FedExmeter = "100276477";
+			APPLICATION.FedExserver = "https://gatewaybeta.fedex.com/xml";
+			APPLICATION.FedExbillingAct = "271120632";
+
+			//MAIL OBJECTS
+            APPLICATION.emailAddress = "ecosrv@fourwaywarehouse.com";
+			APPLICATION.emailServer = "mail14.hostek.com";	
+			APPLICATION.emailPort  =  "26";
+			APPLICATION.emailPassword = "Bc992164!";
+	
+
+
 
 			return true;
 		</cfscript>
@@ -94,5 +119,29 @@ Description :
 
 	</cffunction>
 
+<cffunction name="onError"> 
+    <cfargument name="Exception" required=true/> 
+    <cfargument type="String" name = "EventName" required=true/> 
+    <!--- Log all errors. ---> 
+    <cflog file="#This.Name#" type="error" text="Event Name: #Eventname#"> 
+    <cflog file="#This.Name#" type="error" text="Message: #exception.message#"> 
+    <!--- Some exceptions, including server-side validation errors, do not 
+             generate a rootcause structure. ---> 
+    <cfif isdefined("exception.rootcause")> 
+        <cflog file="#This.Name#" type="error"  
+            text="Root Cause Message: #exception.rootcause.message#"> 
+    </cfif>     
+    <!--- Display an error message if there is a page context. ---> 
+    <cfif NOT (Arguments.EventName IS onSessionEnd) OR  
+            (Arguments.EventName IS onApplicationEnd)> 
+        <cfoutput> 
+            <h2>An unexpected error occurred.</h2> 
+            <p>Please provide the following information to technical support:</p> 
+            <p>Error Event: #EventName#</p> 
+            <p>Error details:<br> 
+            <!--- <cfdump var= "#Exception#"></p>  --->
+        </cfoutput> 
+    </cfif> 
+    </cffunction>
 
 </cfcomponent>

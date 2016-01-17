@@ -23,14 +23,17 @@
 	              <li class="#(activeNav eq 'receiving') ? 'active' : ''#">
 	              	<a href="/admin/receiving/" >Audit Dashboard</a>
 	              </li>
+	           <!---    If not admin show register inbound --->
+	              <cfif Not SESSION.auth.isAdmin> 
 	              <li class="#(activeNav eq 'register-inbound') ? 'active' : ''#">
 	              	<a href="/admin/receiving/register-inbound" >Register Inbound</a>
 	              </li>
+	          </cfif>
 	              <li class="#(activeNav eq 'audit-inbound') ? 'active' : ''#">
 	              	<a href="/admin/receiving/audit-inbound" >Audit Inbound</a>
 	              </li>
 	              <li class="#(activeNav eq 'receiving-archive') ? 'active' : ''#">
-	              	<a href="/admin/receiving/" >Inbound Archive</a>
+	              	<a href="/admin/receiving/" >WIP-Inbound Archive</a>
 	              </li>
 	        		</ul>
 	    			</li>
@@ -59,7 +62,7 @@
 							</ul>
 						</li>
 						<!--- ORDERS--->
-	    			<cfset arOrderSections = ['orders', 'order-entry', 'order-pick', 'order-search', 'edit-order']>
+	    			<cfset arOrderSections = ['orders', 'order-entry','order-upload', 'order-pick', 'order-search', 'edit-order']>
 	    			<li class="sub-menu">
 
 							<a href="javascript:;" class="#( arrayFind(arOrderSections, activeNav) ) ? 'active' : ''#">
@@ -73,17 +76,20 @@
 								<li class="#(activeNav eq 'order-entry') ? 'active' : ''#">
 									<a href="/admin/orders/entry/">Order Entry</a>
 								</li>
+								<li class="#(activeNav eq 'order-upload') ? 'active' : ''#">
+									<a href="/admin/orders/order-upload/">WIP-Order Upload</a>
+								</li>
 								<li class="#(activeNav eq 'order-search') ? 'active' : ''#">
 									<a href="/admin/orders/search/">Order Search</a>
 								</li>
 <cfif SESSION.auth.isAdmin> 
 
 								<li class="#(activeNav eq 'order-pick') ? 'active' : ''#">
-									<a href="/admin/orders/pick/">Order Pick/Pack/Ship</a>
+									<a href="/admin/orders/pick/">WIP-Order Pick/Pack/Ship</a>
 								</li>
 							
 								<li class="#(activeNav eq 'edit-order') ? 'active' : ''#">
-									<a href="/admin/orders/edit/">Order Edit</a>
+									<a href="/admin/orders/edit/">WIP-Order Edit</a>
 								</li>
 							</cfif>
 

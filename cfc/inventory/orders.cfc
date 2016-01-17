@@ -23,7 +23,7 @@
 	  	var rs = {};
   	</cfscript>
 
-    <cfset var colList = "OrderNo, Name, Address1, Address2, City, State, ODate, OZip, email, phone, OStatus, Comments, ShipMethod">
+    <cfset var colList = "OrderNo, vendor, Name, Address1, Address2, City, State, ODate, OZip, email, phone, OStatus, Comments, ShipMethod">
 
     <!--- IF EDIT MODE AND they are an Admin give them extra columns This isn't working correctly so named it 1234 cause it won't work--->
     <cfif ARGUMENTS.mode eq 'edit' AND SESSION.auth.isAdmin>
@@ -40,9 +40,9 @@
     <cfquery name="qInventory">
       SELECT #preserveSingleQuotes(colList)#
       FROM order_d8ta
-
-         group by OrderNo
-        
+           
+            group by OrderNo 
+          
         
    
     </cfquery>
@@ -74,7 +74,7 @@
       var rs = {};
     </cfscript>
 
-    <cfset var colList = "OrderNo, SKU, BriefDesc, Qty, pickstatus, picktime">
+    <cfset var colList = "OrderNo, SKU, BriefDesc, Qty, Bundle, pickstatus, picktime">
 
     <!--- IF EDIT MODE AND they are an Admin give them extra columns This isn't working correctly so named it 1234 cause it won't work--->
     <cfif ARGUMENTS.mode eq 'edit' AND SESSION.auth.isAdmin>
@@ -93,7 +93,7 @@
       SELECT #preserveSingleQuotes(colList)#
       FROM order_d8ta
 
-         group by OrderNo
+      <!---   group by OrderNo --->
         
         
    
@@ -114,4 +114,40 @@
     </cfscript>
 
   </cffunction>
+
+
+  <cffunction name="getPickOrders" access="remote" output="false" returntype="any" hint="Gets Orders from Database">
+  <!--- Scope variables  --->
+<cfset var qOrders = "">
+<cfquery name="qOrders">
+       SELECT   OrderNo, SKU,  BriefDesc as Description
+       FROM pendingpick
+     </cfquery>
+
+<cfreturn qOrders>
+ </cffunction>
+
+  <cffunction name="getOrderInfo" access="remote" output="false" returntype="any" hint="Gets Orders from Database filtering on urlfield">
+
+<cfif structkeyExists(url,'Order_No')>
+<cfscript>
+qryGetOrderResults = new Query(
+        sql = "
+        SELECT OrderNo, OStatus, SKU, Qty, Name, Address1, Address2, City, State, OZip, Bundle, Phone, Email, Comments, ShipMethod, elocid,  BriefDesc as Description
+        FROM order_d8ta
+      
+        WHERE OrderNo=:eOrderNo 
+        ");    
+        qryGetOrderResults.addParam(name="eOrderNo",value=order_no, cfsqltype="cf_sql_varchar");
+        ecoOrderInfo = qryGetOrderResults.execute().getResult();
+       
+</cfscript>  
+<!---   WHERE Ostatus Like 'PICK' --->
+<cfreturn ecoOrderInfo>
+</cfif>
+</cffunction>
+
+
+
+
 	</cfcomponent>

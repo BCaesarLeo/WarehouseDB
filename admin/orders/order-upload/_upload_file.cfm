@@ -10,15 +10,15 @@
             <div class="col-md-12">
                 <ul class="breadcrumb">
               <li><a href="../../"><i class="fa fa-home"></i> Home</a></li>
-              <li><a href="/admin/receiving/">Receiving Audits</a></li>
-              <li class="active">Register Inbound</li>
+              <li><a href="/admin/orders/">Orders</a></li>
+              <li class="active">Order Upload</li>
           </ul>
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Register Inbound Shipment </h3>
+                        <h3 class="panel-title">Upload an Order </h3>
                     </div>
                     <div class="panel-body">
-                        <h2 class="lead">Register an Inbound Shipment</h2>
+                        <h2 class="lead">Upload an Order  for Shipment</h2>
                         <!-- The file upload form used as target for the file upload widget -->
                        <form action="index.cfm" method="POST" enctype="multipart/form-data">
                             <!-- Redirect browsers with JavaScript disabled to the origin page -->
@@ -82,10 +82,10 @@
                 </div>
                     <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Inbound History </h3>
+                        <h3 class="panel-title">Order Upload History </h3>
                     </div>
                     <div class="panel-body">
-                        <h2 class="lead">Inbound Shipment History</h2>
+                        <h2 class="lead">Recently added Order Upload History</h2>
                         <ul class="list-inline">
                                           <cfloop query="exoDisInbound"><cfoutput>            
                                             <li>

@@ -7,12 +7,12 @@
       <div class="col-md-12">
         <ul class="breadcrumb">
               <li><a href="../../"><i class="fa fa-home"></i> Home</a></li>
-              <li><a href="/admin/receiving/">Receiving Audits</a></li>
-              <li class="active">Register Inbound</li>
+              <li><a href="/admin/orders/">Orders</a></li>
+              <li class="active">Upload Orders</li>
           </ul>
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">Shipment Manifest Upload- Step 3 </h3>
+            <h3 class="panel-title">Order Upload- Step 3 </h3>
           </div>
           <div class="panel-body">
 
@@ -20,16 +20,18 @@
 <cftry>
 
 
- 
   <!--- attempt to catch any errors--->
   <cfloop query="session.ecoflexspreadsheetupload">
     <cfquery name="insertData">
-      INSERT INTO Inbound_D8TA (SKU, Brand, Description, Quantity, ContainerNo, ContainerRegDate   )
-      VALUES('#session.ecoflexspreadsheetupload.Col_1#','#session.ecoflexspreadsheetupload.Col_2#','#session.ecoflexspreadsheetupload.Col_3#', '#session.ecoflexspreadsheetupload.Col_4#','#session.ecoflexspreadsheetupload.CONTAINERNO#', <cfqueryparam value = "#session.ecoflexspreadsheetupload.CONTAINERREGDATE#" cfsqltype="CF_SQL_DATE"/>
+      INSERT INTO  eco_orders (OrderNo, Name, Address1, Address2, Ozip, ODate , OStatus  )
+      VALUES('#session.ecoflexspreadsheetupload.OrderNo#','#session.ecoflexspreadsheetupload.OrderName#', '#session.ecoflexspreadsheetupload.OrderAddress#','#session.ecoflexspreadsheetupload.OrderAddress2#','#session.ecoflexspreadsheetupload.OrderZip#', <cfqueryparam value = "#session.ecoflexspreadsheetupload.ORDERREGDATE#" cfsqltype="CF_SQL_DATE"/>, "PICK"
      
               )
             </cfquery>
           </cfloop>
+
+
+
 
           <!--- attempt to catch any errors continued--->
           <cfcatch type="any">
@@ -41,20 +43,8 @@
             </cfoutput>
             <cfabort>
           </cfcatch>
-         
         </cftry>
-         <cfmail  from = "#application.emailaddress#" 
-           subject = "Notice: Incoming EcoFlex Shipment" 
-    to = "bdcurtain@gmail.com, fourway@triad.rr.com" 
-    password = "#application.emailPassword#" 
-    port = "#application.emailPort#"
-    replyto = "bdcurtain@gmail.com" 
-    server = "#application.emailServer#" 
-    username = "ecosrv@fourwaywarehouse.com" >
-      
-The Website has recieved notification of an <cfoutput>#session.ecoflexspreadsheetupload.ContainerNo[1]#</cfoutput> inbound shipment. 
-</cfmail>
-       <h1 class="color-terques"> Successful Upload - Container <cfoutput>#session.ecoflexspreadsheetupload.ContainerNo[1]#</cfoutput> </h1>
+       <h1 class="color-terques"> Successful Upload - Order <cfoutput>#session.ecoflexspreadsheetupload.OrderNo[1]#</cfoutput> </h1>
        <div class="panel">
         
   <div id="bcTarget"></div> 
@@ -66,7 +56,6 @@ The Website has recieved notification of an <cfoutput>#session.ecoflexspreadshee
                             <thead>
                             <tr>
                                 <th>SKU</th>
-                                <th>Brand</th>
                                 <th class="hidden-phone">Description</th>
                                 <th>Quantity</th>
                               
@@ -80,9 +69,8 @@ The Website has recieved notification of an <cfoutput>#session.ecoflexspreadshee
 
                             <tr>
                                 <td><a href="">#session.ecoflexspreadsheetupload.Col_1# </a></td>
-                                <td><a href="">#session.ecoflexspreadsheetupload.Col_2# </a></td>
-                                <td class="hidden-phone">#session.ecoflexspreadsheetupload.Col_3#</td>
-                                <td><span class="label label-info label-mini">#session.ecoflexspreadsheetupload.Col_4#</span></td>
+                                <td class="hidden-phone">#session.ecoflexspreadsheetupload.Col_2#</td>
+                                <td><span class="label label-info label-mini">#session.ecoflexspreadsheetupload.Col_3#</span></td>
                               
                                 
                            </tr>

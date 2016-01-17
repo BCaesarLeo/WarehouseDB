@@ -17,6 +17,7 @@ $(document).ready(function() {
         "columns" : [
             { data: "odate" },
             { data: "orderno" },
+             { data: "vendor" },
             { data: "ostatus" },
             { data: "name" },
             { data: "address1" },
@@ -60,6 +61,7 @@ $(document).ready(function() {
             { data: "sku" },
             { data: "briefdesc" },
             { data: "qty", className: "rowDataSd" },
+            { data: "bundle" },
             { data: "pickstatus" },
             { data: "picktime" }
         

@@ -9,7 +9,7 @@
 
 
 <!--- *********************** THIS PAGE'S INCLUDE FILE --- this is where your main logic goes for this page ***********************--->
-<cfinclude template="/includes/admin/dashboard/_mainDashboard.cfm">
+<cfinclude template="/includes/admin/orders/_orderError.cfm">
 
 <!--- *********************** THIS PAGE's specific javascript such as (datatables, flot, etc..) ***********************--->
 
@@ -56,6 +56,6 @@
 
 <!--- *********************** _footer ***********************--->
 <cfinclude template="/includes/chunks/_footer.cfm">
-<!--- <cfinclude template="/includes/_debug.cfm"> --->
+
 </cfoutput>
 	

@@ -44,8 +44,8 @@
     <!--- Scope variables  --->
 <cfset var qAuditD8TA = "">
 <cfquery name="qAuditD8TA">
-       SELECT  Scanned_SKU,  MaxDescription, containerno, Inbound_Qty, QtyAudit
-       FROM Audit_D8TA_Qry
+       SELECT  SKU,  Description, containerno, anticipatedQty, Auditqty
+       FROM Audit_D8TA_Q
      
      </cfquery>
 
@@ -61,9 +61,9 @@
  <!--- Scope variables  --->
 <cfset var qAuditDistinct= "">
 <!--- Only show 3 results as It's just html --->
-<cfquery name="qAuditDistinct" maxrows="20">
+<cfquery name="qAuditDistinct" maxrows="8">
        SELECT  Distinct DateRcvd, containerno
-       FROM Scanned_D8TA_Qry
+       FROM house_d8ta_q
    ORDER BY DateRcvd DESC
      </cfquery>
 
@@ -91,10 +91,10 @@
  
 
   <cfquery name="qInventory">
-      SELECT  Scanned_SKU, MaxDESCRIPTION, CONTAINERNO, QtyAudit, Inbound_Qty, DateRcvd
-      FROM Audit_D8TA_Qry
-      WHERE QtyAudit <> 0 
-      AND  CONTAINERNO = <cfqueryparam value="#trim(ARGUMENTS.selContainer)#" cfsqltype="cf_sql_varchar" />
+      SELECT  SKU, DESCRIPTION, CONTAINERNO, Auditqty, anticipatedQty, DateRcvd
+      FROM Audit_D8TA_Q
+      WHERE Auditqty <> 0 
+     AND  CONTAINERNO = <cfqueryparam value="#ARGUMENTS.selContainer#" cfsqltype="cf_sql_varchar" /> 
    </cfquery>
 
 
@@ -153,7 +153,7 @@ qryGetContainerResults = new Query(
         sql = "
         SELECT *
         FROM Inbound_D8TA
-        WHERE ContainerNo=:eContainerNo
+        WHERE ContainerNo=:eContainerNo 
         ");    
         qryGetContainerResults.addParam(name="eContainerNo",value=container_no, cfsqltype="cf_sql_varchar");
         ecoContainerInfo = qryGetContainerResults.execute().getResult();

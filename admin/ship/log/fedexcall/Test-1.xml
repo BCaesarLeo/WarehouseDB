@@ -1,0 +1,113 @@
+
+ <ns:ProcessShipmentRequest 
+  xsi:schemaLocation ="http://www.fedex.com/templates/components/apps/wpor/secure/downloads/xml/Aug09/Advanced/ShipService_v7.xsd" 
+  xmlns:ns    ="http://fedex.com/ws/ship/v7" 
+  xmlns:xsi    ="http://www.w3.org/2001/XMLSchema-instance">
+ 
+  <ns:WebAuthenticationDetail>
+    <ns:UserCredential>
+    <ns:Key>mSoBq9VwVNdlHqKW</ns:Key>
+    <ns:Password>Bc993190!</ns:Password>
+    </ns:UserCredential>
+  </ns:WebAuthenticationDetail>
+ 
+  <ns:ClientDetail>
+    <ns:AccountNumber>510087666</ns:AccountNumber>
+    <ns:MeterNumber>100276477</ns:MeterNumber>
+  </ns:ClientDetail>
+ 
+  <ns:TransactionDetail>
+    <ns:CustomerTransactionId>Test-1</ns:CustomerTransactionId>
+  </ns:TransactionDetail>
+ 
+  <ns:Version>
+    <ns:ServiceId>ship</ns:ServiceId>
+    <ns:Major>7</ns:Major>
+    <ns:Intermediate>0</ns:Intermediate>
+    <ns:Minor>0</ns:Minor>
+  </ns:Version>
+  <ns:RequestedShipment>
+    <ns:ShipTimestamp>2016-01-11T08:24:17</ns:ShipTimestamp>
+    <ns:DropoffType>REGULAR_PICKUP</ns:DropoffType>
+    <ns:ServiceType>PRIORITY_OVERNIGHT</ns:ServiceType>
+    <ns:PackagingType>FEDEX_ENVELOPE</ns:PackagingType>
+    <ns:Shipper>
+    <ns:Contact>
+     <ns:PersonName>John Doe</ns:PersonName>
+     <ns:CompanyName>My Company</ns:CompanyName>
+     <ns:PhoneNumber>2015282777</ns:PhoneNumber>
+    </ns:Contact>
+    <ns:Address>
+     <ns:StreetLines>16 Court Street</ns:StreetLines>
+     
+     <ns:City>New York</ns:City>
+     <ns:StateOrProvinceCode>NY</ns:StateOrProvinceCode>
+     <ns:PostalCode>10211</ns:PostalCode>
+     <ns:CountryCode>US</ns:CountryCode>
+     <ns:Residential>false</ns:Residential>
+    </ns:Address>
+    </ns:Shipper>
+    <ns:Recipient>
+    <ns:Contact>
+     <ns:PersonName>John Doe</ns:PersonName>
+     
+     <ns:CompanyName>Fake Company</ns:CompanyName>
+     
+     <ns:PhoneNumber>123456789000</ns:PhoneNumber>
+    </ns:Contact>
+    <ns:Address>
+     <ns:StreetLines>123 Bishop Road</ns:StreetLines>
+     
+     <ns:City>Honolulu</ns:City>
+     <ns:StateOrProvinceCode>HI</ns:StateOrProvinceCode>
+     <ns:PostalCode>96819</ns:PostalCode>
+     <ns:CountryCode>US</ns:CountryCode>
+     <ns:Residential>false</ns:Residential>
+    </ns:Address>
+    </ns:Recipient>
+ 
+    <ns:ShippingChargesPayment>
+    <ns:PaymentType>THIRD_PARTY</ns:PaymentType>
+    <ns:Payor>
+     <ns:AccountNumber>271120632</ns:AccountNumber>
+     <ns:CountryCode>US</ns:CountryCode>
+    </ns:Payor>
+    </ns:ShippingChargesPayment> 
+    
+      
+    <ns:LabelSpecification>
+    <ns:LabelFormatType>COMMON2D</ns:LabelFormatType>
+    <ns:ImageType>PDF</ns:ImageType>
+    <ns:LabelStockType>PAPER_4X6</ns:LabelStockType>
+    </ns:LabelSpecification>
+    
+    <ns:RateRequestTypes>ACCOUNT</ns:RateRequestTypes>
+    
+    <ns:PackageCount>1</ns:PackageCount>
+    <ns:PackageDetail>INDIVIDUAL_PACKAGES</ns:PackageDetail>
+    <ns:RequestedPackageLineItems>
+    <ns:SequenceNumber>1</ns:SequenceNumber>
+    <ns:Weight>
+     <ns:Units>LB</ns:Units>
+     <ns:Value>1</ns:Value>
+    </ns:Weight>
+    <ns:Dimensions>
+     <ns:Length>14</ns:Length>
+     <ns:Width>12</ns:Width>
+     <ns:Height>1</ns:Height>
+     <ns:Units>IN</ns:Units>
+    </ns:Dimensions>
+    <ns:PhysicalPackaging>BOX</ns:PhysicalPackaging>
+ 
+    <ns:CustomerReferences>
+    <ns:CustomerReferenceType>INVOICE_NUMBER</ns:CustomerReferenceType>
+    <ns:Value>Test-1</ns:Value>
+    </ns:CustomerReferences>
+    
+     
+    
+    
+    </ns:RequestedPackageLineItems>
+  </ns:RequestedShipment> 
+ </ns:ProcessShipmentRequest>
+ 

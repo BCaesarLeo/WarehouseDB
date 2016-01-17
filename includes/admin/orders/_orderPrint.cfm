@@ -37,7 +37,7 @@ $( document ).ready(function() {
         //set the literal html into the content textarea of the hidden form... then submit it..
         // $("##content").val( theContent );
         // $("##downloadOrderForm").submit();
-         console.log("hit bottom of this");
+        //  console.log("hit bottom of this");
 
     });
 });
@@ -59,14 +59,14 @@ $( document ).ready(function() {
 
     </section>
 <section>
-	<div>
-<form id="downloadOrderForm" name="downloadOrderForm" action="downloadOrder.cfm" method="post" target="_blank" style="display:none;">
+    <div>
+<form id="downloadOrderForm" name="downloadOrderForm" action="_OrderPrint.cfm" method="post" target="_blank" style="display:none;">
     <input name="orderID" type="hidden" value="12345" />
     <input id="content" name="content" type="hidden" value="" />
 
 </form>
-	</div>
-	</section>
+    </div>
+    </section>
 
 <!--- *********************** THIS PAGE's specific javascript such as (datatables, flot, etc..) ***********************--->
 

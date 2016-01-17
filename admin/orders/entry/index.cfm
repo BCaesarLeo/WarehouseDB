@@ -154,7 +154,7 @@
         	// →  This would be add incrementing rownum to SKU <input id= "qSKU" name="SKU'+rownum+'"
         	
             // Append Custom Row HTML 
-        	$("##customFields").append('<tr class="orderRow"><td>'+rownum+'</td><td><input name="SKU" class="form-control input-lg m-bot11 skuAutoComplete" type="text"  required="yes" autocomplete="off"></td><td><input class="form-control input-lg m-bot10" name="BriefDesc" type="text"  value="Item Description"></td><td id="1"class="something"><input name="Qty" type="text" class="form-control input-lg m-bot10" required="yes"></td><td> <a href="javascript:void(0);" class="remCF btn btn-danger btn-sm">Remove</a></td></tr>');
+        	$("##customFields").append('<tr class="orderRow"><td>'+rownum+'</td><td><input name="SKU" class="form-control input-lg m-bot11 skuAutoComplete" type="text"  required="yes" autocomplete="off"></td><td><input class="form-control input-lg m-bot10" name="BriefDesc" type="text"  value="Item Description"></td><td class="something"><input name="Qty" type="text" class="form-control input-lg m-bot15" required="yes"autocomplete="off"></td><td class="text-center"><input name="Bundle" type="text" class="form-control input-lg m-bot15" required="no" default="b1"></td><td> <a href="javascript:void(0);" class="remCF btn btn-danger btn-sm">Remove</a></td></tr>');
 
 
             $('##customFields tr.orderRow:last').on('focusin' , '.skuAutoComplete', function(e) {
