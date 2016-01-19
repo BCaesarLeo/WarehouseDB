@@ -52,17 +52,19 @@ Description :
 
 			//FEDEX OBJECTS
             APPLICATION.FedExKey = "mSoBq9VwVNdlHqKW";
-			APPLICATION.FedExpassword = "Bc993190!";	
+			APPLICATION.FedExpassword = "PUp6xJcwA8Dh7yiZKfup7d8LH";	
 			APPLICATION.FedExaccount = "510087666";
 			APPLICATION.FedExmeter = "100276477";
 			APPLICATION.FedExserver = "https://gatewaybeta.fedex.com/xml";
 			APPLICATION.FedExbillingAct = "271120632";
+            APPLICATION.FedExCompany = "DynamixS";
+
 
 			//MAIL OBJECTS
             APPLICATION.emailAddress = "ecosrv@fourwaywarehouse.com";
-			APPLICATION.emailServer = "mail14.hostek.com";	
-			APPLICATION.emailPort  =  "26";
-			APPLICATION.emailPassword = "Bc992164!";
+			APPLICATION.emailServer = "";	
+			APPLICATION.emailPort  =  "";
+			APPLICATION.emailPassword = "";
 	
 
 
