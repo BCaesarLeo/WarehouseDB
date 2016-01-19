@@ -59,7 +59,7 @@ Description :
             APPLICATION.FedExbillingAct = "271120632";
             APPLICATION.FedExCompany = "DynamixS";
 
-//NICO
+//NICODEMUS
             //MAIL OBJECTS
             APPLICATION.emailAddress = "";
             APPLICATION.emailServer = "";   
