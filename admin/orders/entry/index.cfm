@@ -185,6 +185,35 @@
             transitionEffect: "slideLeft",
             stepsOrientation: "vertical"
         });
+
+$(function(){       
+        // jQuery UI Dialog   
+                 
+        $('##dialog').dialog({
+            autoOpen: false,
+            width: 400,
+            modal: true,
+            resizable: false,
+            buttons: {
+                "Submit Form": function() {
+                    document.testconfirmJQ.submit();
+                },
+                "Cancel": function() {
+                    $(this).dialog("close");
+                }
+            }
+        });
+         
+        $('form##testconfirmJQ').submit(function(e){
+            e.preventDefault();
+ 
+            $("p##dialog-fOrder").html($("input##fOrder").val());
+            $('##dialog').dialog('open');
+        });
+});
+
+
+
     }); //end document ready everything has to be in document ready...
 </script>
 
