@@ -187,7 +187,7 @@
         });
 
 $(function(){       
-        // jQuery UI Dialog   
+        // jQuery UI Dialog  Popu For Order Confirmation  
                  
         $('##dialog').dialog({
             autoOpen: false,
