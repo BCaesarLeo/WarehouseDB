@@ -1,4 +1,4 @@
-<form action="/cfc/inventory/orderupload.cfc?method=saveOrder" method="post"> 
+<form id ="testconfirmJQ" name="testconfirmJQ" action="/cfc/inventory/orderupload.cfc?method=saveOrder" method="post"> 
 
         
     <!--main content start-->
@@ -219,7 +219,19 @@ Address Line 2: <input type="text" id="fAddress2" name="Address2" class="form-co
                              <input type="Hidden" name="method" value="saveOrder"> 
                             <input type="submit" value="Submit Order" class="btn btn-success btn-lg"></input><!--- <i class="fa fa-check"></i> --->
                             </form>
-                            <a href="invoice_print.html" target="_blank" class="btn btn-primary btn-lg"><i class="fa fa-print"></i> Print </a>
+                        <!---     Removed Print
+                            <a href="invoice_print.html" target="_blank" class="btn btn-primary btn-lg"><i class="fa fa-print"></i> Print </a> --->
+
+
+                            <!--- Dialog for Confirmation --->
+                            <div id="dialog" title="Confirm Order Submission">
+                            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 0 0;"></span> Order Number:</p>
+                            <p id="dialog-fOrder"></p>
+                            <p>If everything appears correct, click Submit Form.</p>
+                            <p>To edit, click Cancel.<p>
+                            </div>
+
+
                         </div>
 
                     </div>
