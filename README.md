@@ -5,10 +5,7 @@ Warehouse DB Build
 Website Designed to: 
 1.	Login to Website
 a.	Two Users   	
-i.	Admin:  Fourway!
-ii.	EcoFlex: 12345!
-
-2.	View Inventory(ECOFLEX) and use asynchronous search functionality to find quantities in stock. Ecoflex  I do need another field named LOCID  “location” to show location.
+2.	View Inventory and use asynchronous search functionality to find quantities in stock. Ecoflex  I do need another field named LOCID  “location” to show location.
 
 3.	Audit Page(ECOFLEX) for incoming shipment.(EcoFlex)  - Upload a spreadsheet of expected inventory inbound -  parse data, rename to a database compliant table.    
 
